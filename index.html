@@ -3,752 +3,514 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101018">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NEXUS AI</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
-:root{
-  --bg:#101018;--panel:#171721;--panel2:#1d1d2a;--panel3:#242434;
-  --text:#f4f3fa;--muted:#9291a6;--line:#ffffff12;
-  --accent:#9875ff;--accent2:#7050e8;--green:#57d6a0;
-  --red:#ff6f83;--radius:17px;
-}
+:root{--bg:#090a10;--panel:#10121c;--panel2:#171a27;--line:#25283a;--text:#f2f2fa;--muted:#9295aa;--accent:#9275ff;--accent2:#7054df;--danger:#ff647c;--green:#54d6a0}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100vh;overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
 button,input,textarea{font:inherit}
 button{cursor:pointer}
-.app{height:100vh;display:flex}
-.sidebar{width:265px;flex-shrink:0;background:#14141d;border-right:1px solid var(--line);display:flex;flex-direction:column;padding:19px 14px;transition:.25s;z-index:5}
-.brand{display:flex;align-items:center;gap:11px;padding:4px 8px 23px}
-.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#b49aff,#7049dc);display:grid;place-items:center;font-family:'Space Grotesk';font-weight:800;font-size:19px;box-shadow:0 5px 25px #8c67ff40}
-.brand-name{font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:1.5px}
-.brand-name span{color:var(--accent)}
-.new-chat{border:1px solid #9875ff60;background:#9875ff17;color:#d9ceff;padding:12px 14px;border-radius:12px;text-align:left;display:flex;align-items:center;gap:10px;font-weight:600;transition:.2s}
-.new-chat:hover{background:#9875ff30;transform:translateY(-1px)}
-.nav-label{font-size:10px;color:#77768c;font-weight:800;letter-spacing:1.5px;margin:26px 9px 10px}
-.history{overflow:auto;flex:1}
-.history-item{padding:10px 11px;border-radius:10px;color:#aaa9ba;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;margin:2px 0}
-.history-item:hover,.history-item.active{background:#ffffff0b;color:white}
-.sidebar-bottom{border-top:1px solid var(--line);padding-top:13px}
-.user-card{display:flex;align-items:center;gap:10px;padding:10px 8px}
-.avatar{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#7958df,#bd8dff);display:grid;place-items:center;font-weight:800;color:white;flex-shrink:0}
-.user-info{min-width:0;flex:1}
-.user-info strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis}
-.user-info small{color:var(--muted);font-size:11px}
-.icon-btn{border:0;background:transparent;color:var(--muted);font-size:17px;padding:7px;border-radius:9px}
-.icon-btn:hover{background:#ffffff12;color:white}
-.main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
-.topbar{height:65px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px;flex-shrink:0}
-.top-left{display:flex;align-items:center;gap:12px}
-.top-title{font-family:'Space Grotesk';font-weight:600;font-size:15px}
-.model-tag{font-size:10px;color:#b9a7ff;background:#9875ff18;border:1px solid #9875ff35;padding:5px 9px;border-radius:20px}
-.top-actions{display:flex;align-items:center;gap:9px}
-.usage-pill{font-size:11px;color:#c5c3d5;background:#ffffff09;border:1px solid var(--line);padding:7px 10px;border-radius:20px}
-.content{flex:1;overflow:auto;display:flex;flex-direction:column}
-.chat-area{width:min(850px,100%);margin:0 auto;padding:35px 24px 24px;flex:1}
-.welcome{text-align:center;padding:10vh 10px 25px}
-.welcome-orb{width:68px;height:68px;border-radius:23px;margin:0 auto 23px;background:linear-gradient(145deg,#b39aff,#6842d6);display:grid;place-items:center;font-size:30px;box-shadow:0 12px 55px #825cff40}
-.welcome h1{font-family:'Space Grotesk';font-size:clamp(29px,5vw,43px);margin:0 0 12px;letter-spacing:-1.5px}
-.gradient-text{background:linear-gradient(90deg,#c3adff,#8e70ff,#d2b5ff);background-clip:text;color:transparent}
-.welcome p{color:var(--muted);font-size:14px;line-height:1.7;max-width:470px;margin:0 auto}
-.suggestions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:570px;margin:32px auto}
-.suggestion{border:1px solid var(--line);background:#ffffff06;color:#d8d6e5;text-align:left;padding:15px;border-radius:13px;font-size:12px;transition:.2s}
-.suggestion:hover{border-color:#9875ff70;background:#9875ff10;transform:translateY(-2px)}
-.suggestion strong{display:block;font-size:13px;margin-bottom:5px;color:white}
-.messages{display:flex;flex-direction:column;gap:25px;padding-bottom:30px}
-.message{display:flex;gap:13px;align-items:flex-start;animation:appear .25s ease}
-@keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-.message.user{flex-direction:row-reverse}
-.message-avatar{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;font-size:12px;font-weight:800}
-.message.assistant .message-avatar{background:linear-gradient(145deg,#a88aff,#6846d3)}
-.message.user .message-avatar{background:#343344}
-.message-body{max-width:calc(100% - 45px);min-width:0}
-.message.user .message-body{text-align:right}
-.message-name{font-size:11px;color:var(--muted);margin:0 0 7px}
-.bubble{font-size:14px;line-height:1.75;color:#e5e3ef;overflow-wrap:anywhere}
-.message.user .bubble{display:inline-block;text-align:left;background:#272538;padding:11px 15px;border-radius:15px 4px 15px 15px;max-width:100%}
-.bubble p{margin:0 0 11px}.bubble p:last-child{margin-bottom:0}
-.bubble pre{white-space:pre;overflow:auto;background:#0b0b12;border:1px solid var(--line);border-radius:11px;padding:15px;font-size:12px}
-.bubble code{font-family:Consolas,monospace;background:#ffffff12;padding:2px 5px;border-radius:5px;font-size:.92em}
-.bubble pre code{background:none;padding:0}
-.bubble h1,.bubble h2,.bubble h3{font-family:'Space Grotesk';line-height:1.3}
-.bubble ul,.bubble ol{padding-left:22px}
-.bubble blockquote{border-left:3px solid var(--accent);margin:10px 0;padding:5px 13px;color:#bdb9cf}
-.copy-btn{font-size:10px;color:var(--muted);border:1px solid var(--line);background:transparent;padding:5px 8px;border-radius:7px;margin-top:8px}
-.copy-btn:hover{color:white;background:#ffffff10}
-.composer-wrap{padding:15px 24px 20px;flex-shrink:0;background:linear-gradient(transparent,var(--bg) 22%)}
-.composer{width:min(850px,100%);margin:auto;border:1px solid #ffffff20;background:#1a1a25;border-radius:17px;padding:11px 12px 9px;box-shadow:0 12px 45px #0003;transition:.2s}
-.composer:focus-within{border-color:#9875ff80;box-shadow:0 0 0 3px #9875ff13}
-#messageInput{width:100%;border:0;outline:0;background:transparent;color:white;resize:none;min-height:43px;max-height:180px;padding:8px 7px;font-size:14px;line-height:1.5}
-#messageInput::placeholder{color:#77768a}
-.composer-bottom{display:flex;justify-content:space-between;align-items:center;padding:3px 2px 0}
-.composer-hint{font-size:10px;color:#77768a}
-.send-btn{width:35px;height:35px;border:0;border-radius:11px;background:var(--accent);color:white;font-size:17px;font-weight:700;transition:.2s}
-.send-btn:hover{background:#ad91ff;transform:translateY(-1px)}
-.send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.typing{display:flex;gap:5px;padding:8px 0}
-.typing i{width:6px;height:6px;background:#a98dff;border-radius:50%;animation:pulse 1s infinite}
-.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
-@keyframes pulse{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
-.overlay{position:fixed;inset:0;background:#0009;backdrop-filter:blur(5px);z-index:20;display:none;align-items:center;justify-content:center;padding:18px}
-.overlay.show{display:flex}
-.modal{background:#191923;border:1px solid var(--line);width:min(650px,100%);max-height:90vh;overflow:auto;border-radius:20px;padding:24px;box-shadow:0 25px 100px #0009;animation:appear .2s}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
-.modal-head h2{font-family:'Space Grotesk';font-size:21px;margin:0}
-.close{border:0;background:#ffffff0d;color:#aaa;border-radius:9px;width:32px;height:32px;font-size:19px}
-.tabs{display:flex;gap:7px;background:#111119;padding:5px;border-radius:11px;margin-bottom:20px}
-.tab{flex:1;border:0;background:transparent;color:var(--muted);padding:10px;border-radius:8px;font-size:12px}
-.tab.active{background:#292638;color:white}
-.field{margin-bottom:15px}
-.field label{display:block;color:#b9b7c8;font-size:12px;margin-bottom:7px}
-.field input,.field textarea,.field select{width:100%;background:#101018;border:1px solid var(--line);border-radius:10px;padding:12px;color:white;outline:none;font-size:13px}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#9875ff90}
-.field textarea{resize:vertical;min-height:110px;line-height:1.6}
-.primary{border:0;background:linear-gradient(100deg,#9875ff,#7450e5);color:white;padding:11px 17px;border-radius:10px;font-weight:700;font-size:12px;transition:.2s}
-.primary:hover{filter:brightness(1.13);transform:translateY(-1px)}
-.secondary{border:1px solid var(--line);background:#ffffff08;color:#ddd;padding:10px 14px;border-radius:10px;font-size:12px}
-.danger{border:1px solid #ff6f8340;background:#ff6f8312;color:#ff8797;padding:10px 14px;border-radius:10px;font-size:12px}
-.form-note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:12px}
-.auth-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 20%,#30244c 0,#15131f 40%,#101018 80%);z-index:30;display:flex;align-items:center;justify-content:center;padding:20px}
-.auth-card{width:min(410px,100%);background:#191923eF;border:1px solid #ffffff17;border-radius:22px;padding:30px;box-shadow:0 25px 100px #0008}
-.auth-brand{text-align:center;margin-bottom:25px}
-.auth-brand .logo{margin:0 auto 12px;width:52px;height:52px;font-size:25px;border-radius:17px}
-.auth-brand h1{font-family:'Space Grotesk';font-size:25px;letter-spacing:2px;margin:0}
-.auth-brand p{color:var(--muted);font-size:12px;margin-top:8px}
-.auth-submit{width:100%;margin-top:5px;padding:13px}
-.auth-switch{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
-.auth-switch button{border:0;background:none;color:#bba8ff;font-weight:700}
 .hidden{display:none!important}
-.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);background:#292836;border:1px solid var(--line);padding:11px 17px;border-radius:11px;font-size:12px;color:white;opacity:0;pointer-events:none;transition:.25s;z-index:50;box-shadow:0 8px 30px #0005}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-bottom:20px}
-.stat-card{background:#ffffff07;border:1px solid var(--line);border-radius:13px;padding:15px}
-.stat-card small{color:var(--muted);font-size:11px}
-.stat-card strong{display:block;font-family:'Space Grotesk';font-size:25px;margin-top:7px}
-.stat-card span{font-size:10px;color:#aaa8ba}
-.section-title{font-family:'Space Grotesk';font-size:14px;margin:22px 0 11px}
-.progress{height:7px;background:#ffffff12;border-radius:10px;overflow:hidden;margin:10px 0}
-.progress div{height:100%;background:linear-gradient(90deg,#8b6bff,#c09fff);border-radius:10px}
-.admin-table{width:100%;border-collapse:collapse;font-size:12px}
-.admin-table th{text-align:left;color:var(--muted);font-weight:500;padding:10px 8px;border-bottom:1px solid var(--line)}
-.admin-table td{padding:11px 8px;border-bottom:1px solid var(--line);color:#e2e0eb}
-.status-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:6px}
-.admin-note{padding:12px;background:#9875ff12;border:1px solid #9875ff30;border-radius:11px;color:#c8baff;font-size:11px;line-height:1.6}
-.settings-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 0;border-bottom:1px solid var(--line)}
-.settings-row strong{font-size:13px}.settings-row small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+#auth{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(ellipse at 50% 20%,#29204d 0%,#090a10 65%)}
+.auth-card{width:min(420px,100%);background:#11131dee;border:1px solid var(--line);border-radius:22px;padding:34px;box-shadow:0 25px 90px #0008}
+.logo{font-size:29px;font-weight:850;letter-spacing:3px}
+.logo span{color:var(--accent)}
+.sub{color:var(--muted);font-size:13px;margin:8px 0 26px}
+.field{width:100%;padding:13px 14px;background:#0b0d15;border:1px solid var(--line);border-radius:11px;color:white;outline:none;margin:7px 0}
+.field:focus,textarea:focus{border-color:var(--accent)}
+.primary{background:var(--accent);color:white;border:0;border-radius:10px;padding:12px 17px;font-weight:700}
+.primary:hover{background:var(--accent2)}
+.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px 15px}
+.danger{background:#391923;color:#ff8798;border:1px solid #6c293a;border-radius:9px;padding:9px 12px}
+.auth-card button{width:100%;margin-top:12px}
+.switch{color:var(--muted);font-size:13px;text-align:center;margin-top:18px}
+.switch a{color:#b4a4ff;cursor:pointer}
+#app{height:100vh;display:flex;overflow:hidden}
+.sidebar{width:265px;flex-shrink:0;background:#0e1018;border-right:1px solid var(--line);display:flex;flex-direction:column;padding:19px 13px}
+.brand{font-size:21px;font-weight:850;letter-spacing:2px;padding:5px 10px 22px}
+.brand span{color:var(--accent)}
+.newchat{width:100%;text-align:left;background:#211c37;color:#d9d0ff;border:1px solid #3b315d;border-radius:11px;padding:12px;margin-bottom:20px}
+.section-label{font-size:10px;color:#777b91;font-weight:800;letter-spacing:1.5px;padding:8px 10px}
+#history{overflow:auto;flex:1}
+.history-item{display:flex;align-items:center;gap:7px;padding:10px;border-radius:9px;color:#b9bbca;font-size:13px;cursor:pointer;margin:2px 0}
+.history-item:hover,.history-item.active{background:var(--panel2);color:white}
+.history-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.delete-chat{border:0;background:none;color:#777;font-size:17px}
+.userbox{border-top:1px solid var(--line);padding:14px 8px 3px;display:flex;align-items:center;gap:10px}
+.avatar{width:34px;height:34px;border-radius:11px;background:#302653;display:grid;place-items:center;color:#c5b7ff;font-weight:800}
+.userinfo{flex:1;min-width:0}
+.userinfo b{font-size:13px;display:block;overflow:hidden;text-overflow:ellipsis}
+.userinfo small{color:var(--muted);font-size:11px}
+.iconbtn{background:none;border:0;color:#a6a8b8;padding:8px}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{height:60px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.topbar-title{font-size:14px;font-weight:700}
+.status{font-size:11px;color:var(--green)}
+#messages{flex:1;overflow:auto;padding:30px 18px}
+.welcome{max-width:760px;margin:10vh auto 0;text-align:center}
+.welcome h1{font-size:38px;letter-spacing:-1.5px;margin:12px 0}
+.welcome p{color:var(--muted)}
+.suggestions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:30px}
+.suggestion{padding:15px;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:#c9c9d8}
+.suggestion:hover{border-color:var(--accent)}
+.message{max-width:850px;margin:0 auto 25px;display:flex;gap:13px;line-height:1.7}
+.message .avatar{flex-shrink:0}
+.message-body{min-width:0;flex:1;overflow-wrap:anywhere}
+.message-body pre{background:#080a11;border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto}
+.message-body code{font-family:Consolas,monospace;font-size:13px}
+.message-body p{margin:0 0 10px}
+.composer-wrap{padding:12px 18px 20px}
+.composer{max-width:850px;margin:auto;background:#141622;border:1px solid #303247;border-radius:16px;padding:10px;display:flex;align-items:flex-end;gap:10px}
+.composer textarea{flex:1;resize:none;max-height:180px;min-height:45px;background:none;border:0;color:white;outline:none;padding:10px}
+.send{width:42px;height:42px;border:0;border-radius:11px;background:var(--accent);color:white;font-size:18px}
+.disclaimer{text-align:center;color:#696d80;font-size:10px;margin-top:9px}
+.panel{max-width:900px;width:100%;margin:0 auto;padding:30px 22px;overflow:auto}
+.panel h1{font-size:25px;margin:0 0 7px}
+.muted{color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:23px 0}
+.tab{padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:#aaa}
+.tab.active{background:#292143;border-color:#55428a;color:#ddd2ff}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:13px 0}
+.card h3{margin:0 0 12px;font-size:15px}
+.card textarea{width:100%;min-height:130px;resize:vertical;background:#0b0d15;border:1px solid var(--line);border-radius:10px;padding:13px;color:white;outline:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px}
+.stat strong{font-size:25px;display:block;margin-top:7px}
+.stat small{color:var(--muted)}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--muted);font-size:11px}
+.account-actions{display:flex;gap:7px}
+.empty{color:var(--muted);text-align:center;padding:35px}
+#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#242638;border:1px solid #41445c;padding:12px 18px;border-radius:10px;z-index:20;display:none;font-size:13px}
 #mobileMenu{display:none}
-@media(max-width:720px){
- .sidebar{position:fixed;left:-280px;top:0;bottom:0;box-shadow:15px 0 50px #0008}
- .sidebar.open{left:0}
- #mobileMenu{display:inline-flex}
- .topbar{padding:0 14px}.chat-area{padding:20px 14px}
- .composer-wrap{padding:10px 12px 13px}
- .welcome{padding-top:8vh}
- .suggestions{grid-template-columns:1fr;margin-top:22px}
- .modal{padding:19px}
- .admin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:700px){
+.sidebar{position:fixed;z-index:10;left:-280px;top:0;bottom:0;transition:.2s}
+.sidebar.open{left:0}
+#mobileMenu{display:inline-block}
+.stats{grid-template-columns:1fr}
+.welcome h1{font-size:30px}
+.suggestions{grid-template-columns:1fr}
+#messages{padding:20px 12px}
+.panel{padding:24px 15px}
 }
-@media(max-width:390px){.usage-pill{display:none}.admin-grid{grid-template-columns:1fr 1fr}.stat-card strong{font-size:21px}}
 </style>
 </head>
 <body>
 
-<div class="auth-screen" id="authScreen">
-  <div class="auth-card">
-    <div class="auth-brand">
-      <div class="logo">N</div>
-      <h1>NEXUS <span class="gradient-text">AI</span></h1>
-      <p>Tu espacio de inteligencia artificial.</p>
-    </div>
-    <div class="tabs">
-      <button class="tab active" id="loginTab" onclick="setAuthMode('login')">Iniciar sesión</button>
-      <button class="tab" id="registerTab" onclick="setAuthMode('register')">Crear cuenta</button>
-    </div>
-    <form id="authForm">
-      <div class="field">
-        <label>Nombre de usuario</label>
-        <input id="authUsername" autocomplete="username" minlength="3" maxlength="20" required placeholder="Tu usuario">
-      </div>
-      <div class="field">
-        <label>Contraseña</label>
-        <input id="authPassword" type="password" autocomplete="current-password" required placeholder="Tu contraseña">
-      </div>
-      <button class="primary auth-submit" id="authSubmit">Entrar en NEXUS</button>
-    </form>
-    <div class="auth-switch" id="authSwitch">¿No tienes cuenta? <button onclick="setAuthMode('register')">Regístrate</button></div>
-    <p class="form-note">Tus conversaciones y preferencias se guardan en tu cuenta.</p>
+<section id="auth">
+ <div class="auth-card">
+  <div class="logo">NEXUS<span>AI</span></div>
+  <div class="sub">Tu espacio de inteligencia artificial.</div>
+  <div id="loginForm">
+   <h2>Iniciar sesión</h2>
+   <input class="field" id="loginUser" placeholder="Nombre de usuario" autocomplete="username">
+   <input class="field" id="loginPass" type="password" placeholder="Contraseña" autocomplete="current-password">
+   <button class="primary" onclick="login()">Entrar</button>
+   <div class="switch">¿No tienes cuenta? <a onclick="showRegister()">Crear cuenta</a></div>
   </div>
-</div>
-
-<div class="app hidden" id="app">
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <div class="logo">N</div>
-      <div class="brand-name">NEXUS <span>AI</span></div>
-    </div>
-    <button class="new-chat" onclick="newChat()"><span>＋</span> Nueva conversación</button>
-    <div class="nav-label">TU ESPACIO</div>
-    <div class="history" id="history"></div>
-    <div class="sidebar-bottom">
-      <div class="user-card">
-        <div class="avatar" id="userAvatar">N</div>
-        <div class="user-info"><strong id="sidebarUsername">Usuario</strong><small id="sidebarRole">Cuenta personal</small></div>
-        <button class="icon-btn" title="Ajustes" onclick="openSettings()">⚙</button>
-      </div>
-      <button class="secondary" style="width:100%" onclick="logout()">Cerrar sesión</button>
-    </div>
-  </aside>
-
-  <main class="main">
-    <header class="topbar">
-      <div class="top-left">
-        <button class="icon-btn" id="mobileMenu" onclick="toggleSidebar()">☰</button>
-        <span class="top-title">NEXUS AI</span>
-        <span class="model-tag">GEMMA · 4</span>
-      </div>
-      <div class="top-actions">
-        <span class="usage-pill" id="usagePill">Cargando uso…</span>
-        <button class="icon-btn" title="Ajustes" onclick="openSettings()">⚙</button>
-      </div>
-    </header>
-
-    <div class="content" id="content">
-      <div class="chat-area">
-        <section class="welcome" id="welcome">
-          <div class="welcome-orb">✦</div>
-          <h1>¿Qué vamos a <span class="gradient-text">crear hoy?</span></h1>
-          <p>Ideas, código, aprendizaje y creatividad. Todo empieza con una pregunta.</p>
-          <div class="suggestions">
-            <button class="suggestion" onclick="useSuggestion('Enséñame algo interesante que probablemente no conozca.')"><strong>✧ Descubre algo</strong>Aprende algo nuevo e interesante</button>
-            <button class="suggestion" onclick="useSuggestion('Ayúdame a crear una página web moderna desde cero.')"><strong>⌘ Crear código</strong>Construye algo desde cero</button>
-            <button class="suggestion" onclick="useSuggestion('Explícame un tema difícil de forma sencilla.')"><strong>◈ Aprende</strong>Entiende cualquier concepto</button>
-            <button class="suggestion" onclick="useSuggestion('Dame cinco ideas originales para un proyecto.')"><strong>✳ Inspiración</strong>Encuentra tu próxima idea</button>
-          </div>
-        </section>
-        <div class="messages" id="messages"></div>
-      </div>
-    </div>
-
-    <div class="composer-wrap">
-      <div class="composer">
-        <textarea id="messageInput" rows="1" placeholder="Escribe tu mensaje a NEXUS..." onkeydown="handleInputKey(event)" oninput="resizeInput(this)"></textarea>
-        <div class="composer-bottom">
-          <span class="composer-hint">NEXUS puede cometer errores. Comprueba la información importante.</span>
-          <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
-        </div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<div class="overlay" id="settingsOverlay" onclick="overlayClose(event,'settingsOverlay')">
-  <div class="modal">
-    <div class="modal-head"><h2>Ajustes</h2><button class="close" onclick="closeModal('settingsOverlay')">×</button></div>
-    <div class="tabs">
-      <button class="tab active" id="settingsTabGeneral" onclick="settingsTab('general')">General</button>
-      <button class="tab" id="settingsTabMemory" onclick="settingsTab('memory')">Memoria</button>
-      <button class="tab" id="settingsTabAccount" onclick="settingsTab('account')">Cuenta</button>
-      <button class="tab hidden" id="settingsTabAdmin" onclick="settingsTab('admin')">Admin</button>
-    </div>
-
-    <div id="settingsGeneral">
-      <div class="field">
-        <label>Personalidad de NEXUS</label>
-        <select id="prefPersonality">
-          <option value="balanced">Equilibrada</option>
-          <option value="friendly">Cercana y amable</option>
-          <option value="professional">Profesional</option>
-          <option value="creative">Creativa</option>
-          <option value="teacher">Profesor paciente</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Longitud de las respuestas</label>
-        <select id="prefLength">
-          <option value="balanced">Equilibrada</option>
-          <option value="short">Breve</option>
-          <option value="detailed">Detallada</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Tema</label>
-        <select id="prefTheme">
-          <option value="dark">Oscuro</option>
-          <option value="midnight">Medianoche</option>
-        </select>
-      </div>
-      <button class="primary" onclick="savePreferences()">Guardar preferencias</button>
-    </div>
-
-    <div id="settingsMemory" class="hidden">
-      <p class="form-note" style="margin:0 0 12px">Escribe aquí información que quieras que NEXUS tenga en cuenta en futuras conversaciones. Puedes editarla o borrarla cuando quieras.</p>
-      <div class="field"><label>Tu memoria</label><textarea id="memoryText" maxlength="10000" placeholder="Por ejemplo: Me gustan las explicaciones paso a paso..."></textarea></div>
-      <button class="primary" onclick="saveMemory()">Guardar memoria</button>
-      <button class="danger" onclick="clearMemory()">Borrar memoria</button>
-    </div>
-
-    <div id="settingsAccount" class="hidden">
-      <div class="settings-row"><div><strong id="accountName">Usuario</strong><small>Nombre de usuario</small></div><span class="model-tag">Cuenta activa</span></div>
-      <h3 class="section-title">Cambiar contraseña</h3>
-      <div class="field"><label>Contraseña actual</label><input id="currentPassword" type="password" autocomplete="current-password"></div>
-      <div class="field"><label>Nueva contraseña</label><input id="newPassword" type="password" autocomplete="new-password" minlength="8"></div>
-      <button class="primary" onclick="changePassword()">Actualizar contraseña</button>
-    </div>
-
-    <div id="settingsAdmin" class="hidden">
-      <div class="admin-grid">
-        <div class="stat-card"><small>Usuarios registrados</small><strong id="statUsers">—</strong><span>De 10 cuentas máximas</span></div>
-        <div class="stat-card"><small>Mensajes de hoy</small><strong id="statMessages">—</strong><span>Total de todas las cuentas</span></div>
-        <div class="stat-card"><small>Límite normal</small><strong id="statLimit">15</strong><span>Respuestas por usuario al día</span></div>
-        <div class="stat-card"><small>Tu uso hoy</small><strong id="statAdminUsage">—</strong><span>Cuenta administradora</span></div>
-      </div>
-
-      <h3 class="section-title">Capacidad de cuentas</h3>
-      <div class="progress"><div id="userProgress" style="width:0%"></div></div>
-      <p class="form-note" id="userProgressText">Cargando cuentas...</p>
-
-      <h3 class="section-title">Consumo de Workers AI</h3>
-      <div class="stat-card">
-        <small>Estado de cuota del proveedor</small>
-        <strong id="providerQuota" style="font-size:15px">Consultando...</strong>
-        <span id="providerQuotaDetail">La cuota real debe consultarse en Cloudflare.</span>
-      </div>
-      <div class="admin-note" style="margin-top:11px">
-        Las neuronas son unidades de consumo de Workers AI. Este panel no inventa el saldo: el Worker actual todavía no consulta el consumo real de Cloudflare. La información de uso de la aplicación sí se muestra abajo.
-      </div>
-
-      <h3 class="section-title">Uso por usuario</h3>
-      <div style="overflow-x:auto">
-        <table class="admin-table">
-          <thead><tr><th>Usuario</th><th>Mensajes hoy</th><th>Estado</th></tr></thead>
-          <tbody id="adminUsers"><tr><td colspan="3">Cargando...</td></tr></tbody>
-        </table>
-      </div>
-      <button class="secondary" style="margin-top:14px" onclick="loadAdminStats()">↻ Actualizar estadísticas</button>
-    </div>
+  <div id="registerForm" class="hidden">
+   <h2>Crear cuenta</h2>
+   <input class="field" id="regUser" placeholder="Nombre de usuario">
+   <input class="field" id="regPass" type="password" placeholder="Contraseña (mínimo 8 caracteres)">
+   <button class="primary" onclick="register()">Registrarme</button>
+   <div class="switch">¿Ya tienes cuenta? <a onclick="showLogin()">Iniciar sesión</a></div>
   </div>
+ </div>
+</section>
+
+<div id="app" class="hidden">
+ <aside class="sidebar" id="sidebar">
+  <div class="brand">NEXUS<span>AI</span></div>
+  <button class="newchat" onclick="newChat()">＋ &nbsp; Nueva conversación</button>
+  <div class="section-label">CONVERSACIONES</div>
+  <div id="history"></div>
+  <div class="userbox">
+   <div class="avatar" id="avatar">N</div>
+   <div class="userinfo"><b id="sideUsername">Usuario</b><small id="sideRole">Cuenta normal</small></div>
+   <button class="iconbtn" title="Ajustes" onclick="showSettings()">⚙</button>
+   <button class="iconbtn" title="Cerrar sesión" onclick="logout()">↪</button>
+  </div>
+ </aside>
+
+ <main class="main">
+  <header class="topbar">
+   <div style="display:flex;align-items:center;gap:12px">
+    <button class="iconbtn" id="mobileMenu" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+    <div class="topbar-title" id="pageTitle">Nueva conversación</div>
+   </div>
+   <div class="status">● NEXUS conectado</div>
+  </header>
+
+  <section id="chatView" style="display:flex;flex:1;min-height:0;flex-direction:column">
+   <div id="messages">
+    <div class="welcome" id="welcome">
+     <div class="logo">NEXUS<span>AI</span></div>
+     <h1>¿En qué puedo ayudarte?</h1>
+     <p>Pregunta, aprende, crea y descubre.</p>
+     <div class="suggestions">
+      <button class="suggestion" onclick="suggest('Explícame un tema difícil paso a paso')">✦ Explícame algo complicado</button>
+      <button class="suggestion" onclick="suggest('Ayúdame a crear una página web')">⌘ Crear una página web</button>
+      <button class="suggestion" onclick="suggest('Dame ideas originales para un proyecto')">◇ Ideas para un proyecto</button>
+      <button class="suggestion" onclick="suggest('Ayúdame a estudiar de forma entretenida')">▤ Ayúdame a estudiar</button>
+     </div>
+    </div>
+   </div>
+   <div class="composer-wrap">
+    <div class="composer">
+     <textarea id="messageInput" rows="1" placeholder="Escribe un mensaje a NEXUS..." onkeydown="handleEnter(event)"></textarea>
+     <button class="send" id="sendBtn" onclick="sendMessage()">↑</button>
+    </div>
+    <div class="disclaimer">NEXUS AI puede cometer errores. Comprueba la información importante.</div>
+   </div>
+  </section>
+
+  <section id="settingsView" class="panel hidden">
+   <h1>Ajustes</h1><p class="muted">Gestiona tu cuenta y personaliza NEXUS.</p>
+   <div class="tabs">
+    <button class="tab active" onclick="settingsTab('account',this)">Cuenta</button>
+    <button class="tab" onclick="settingsTab('memory',this)">Memoria</button>
+    <button class="tab" onclick="settingsTab('preferences',this)">Preferencias</button>
+    <button class="tab hidden" id="adminTab" onclick="settingsTab('admin',this)">Administración</button>
+   </div>
+   <div id="accountPanel">
+    <div class="card">
+     <h3>Tu cuenta</h3>
+     <p class="muted">Usuario: <b id="settingsUsername"></b></p>
+     <p class="muted" id="usageText"></p>
+    </div>
+    <div class="card">
+     <h3>Cambiar contraseña</h3>
+     <input class="field" id="currentPass" type="password" placeholder="Contraseña actual">
+     <input class="field" id="newPass" type="password" placeholder="Nueva contraseña">
+     <button class="primary" onclick="changePassword()">Guardar contraseña</button>
+    </div>
+    <div class="card">
+     <h3>Sesión</h3>
+     <button class="secondary" onclick="logout()">Cerrar sesión</button>
+    </div>
+   </div>
+   <div id="memoryPanel" class="hidden">
+    <div class="card">
+     <h3>Memoria de NEXUS</h3>
+     <p class="muted">Información que NEXUS puede utilizar como contexto en tus conversaciones.</p>
+     <textarea id="memoryText" placeholder="Escribe aquí información que quieras que NEXUS recuerde..."></textarea>
+     <button class="primary" style="margin-top:12px" onclick="saveMemory()">Guardar memoria</button>
+    </div>
+   </div>
+   <div id="preferencesPanel" class="hidden">
+    <div class="card">
+     <h3>Preferencias de respuesta</h3>
+     <p class="muted">Personaliza el estilo de las respuestas de NEXUS.</p>
+     <textarea id="preferencesText" placeholder="Ejemplo: prefiero respuestas claras y directas..."></textarea>
+     <button class="primary" style="margin-top:12px" onclick="savePreferences()">Guardar preferencias</button>
+    </div>
+   </div>
+   <div id="adminPanel" class="hidden">
+    <h2 style="font-size:19px">Panel de administración</h2>
+    <p class="muted">Control de cuentas y actividad de NEXUS AI.</p>
+    <div class="stats">
+     <div class="stat"><small>Usuarios registrados</small><strong id="totalUsers">—</strong></div>
+     <div class="stat"><small>Máximo de cuentas</small><strong id="maxUsers">—</strong></div>
+     <div class="stat"><small>Mensajes de hoy</small><strong id="messagesToday">—</strong></div>
+    </div>
+    <div class="card">
+     <h3>Cuentas registradas</h3>
+     <p class="muted">Eliminar una cuenta borra permanentemente sus datos y libera una plaza.</p>
+     <div class="table-wrap">
+      <table>
+       <thead><tr><th>Usuario</th><th>Mensajes hoy</th><th>Acciones</th></tr></thead>
+       <tbody id="usersTable"><tr><td colspan="3">Cargando...</td></tr></tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+  </section>
+ </main>
 </div>
 
-<div class="toast" id="toast"></div>
+<div id="toast"></div>
 
 <script>
-const API_URL = "https://nexus-ai.jacogalcraft.workers.dev";
-let token = localStorage.getItem("nexus_token") || "";
-let currentUser = null;
-let currentConversation = null;
-let authMode = "login";
-let isSending = false;
-let preferences = {};
+const API_URL="https://nexus-ai.jacogalcraft.workers.dev";
+let token=localStorage.getItem("nexus_token")||"";
+let currentUser=null;
+let currentConversation=null;
+let conversations=[];
 
-async function api(path, body = {}) {
-  const response = await fetch(API_URL + path, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { "Authorization": "Bearer " + token } : {})
-    },
-    body: JSON.stringify(body)
+async function api(path,data={}){
+ const response=await fetch(API_URL+path,{
+  method:"POST",
+  headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
+  body:JSON.stringify(data)
+ });
+ let result={};
+ try{result=await response.json()}catch{}
+ if(!response.ok)throw new Error(result.error||"Error de conexión");
+ return result;
+}
+function toast(message){
+ const el=document.getElementById("toast");
+ el.textContent=message;el.style.display="block";
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>el.style.display="none",3000);
+}
+function showLogin(){
+ document.getElementById("loginForm").classList.remove("hidden");
+ document.getElementById("registerForm").classList.add("hidden");
+}
+function showRegister(){
+ document.getElementById("loginForm").classList.add("hidden");
+ document.getElementById("registerForm").classList.remove("hidden");
+}
+async function login(){
+ const username=document.getElementById("loginUser").value.trim();
+ const password=document.getElementById("loginPass").value;
+ try{
+  const r=await fetch(API_URL+"/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username,password})});
+  const d=await r.json();if(!r.ok)throw new Error(d.error);
+  token=d.token;localStorage.setItem("nexus_token",token);
+  await startApp(d.user,d.usage);
+ }catch(e){toast(e.message||"No se pudo iniciar sesión")}
+}
+async function register(){
+ const username=document.getElementById("regUser").value.trim();
+ const password=document.getElementById("regPass").value;
+ try{
+  const r=await fetch(API_URL+"/api/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username,password})});
+  const d=await r.json();if(!r.ok)throw new Error(d.error);
+  token=d.token;localStorage.setItem("nexus_token",token);
+  await startApp(d.user,d.usage);
+ }catch(e){toast(e.message||"No se pudo crear la cuenta")}
+}
+async function startApp(user,usage){
+ currentUser=user;
+ document.getElementById("auth").classList.add("hidden");
+ document.getElementById("app").classList.remove("hidden");
+ document.getElementById("sideUsername").textContent=user.username;
+ document.getElementById("settingsUsername").textContent=user.username;
+ document.getElementById("avatar").textContent=user.username[0].toUpperCase();
+ document.getElementById("sideRole").textContent=user.admin?"Administrador":"Cuenta normal";
+ document.getElementById("adminTab").classList.toggle("hidden",!user.admin);
+ updateUsage(usage);
+ await loadHistory();
+ newChat();
+}
+function updateUsage(usage){
+ if(!usage)return;
+ document.getElementById("usageText").textContent=usage.unlimited?
+ "Límite diario: ilimitado":
+ `Respuestas utilizadas hoy: ${usage.today} / ${usage.dailyLimit}`;
+}
+async function checkSession(){
+ if(!token)return;
+ try{
+  const d=await api("/api/me");
+  await startApp(d.user,d.usage);
+ }catch{token="";localStorage.removeItem("nexus_token")}
+}
+async function logout(){
+ try{if(token)await api("/api/logout")}catch{}
+ token="";localStorage.removeItem("nexus_token");
+ location.reload();
+}
+function newChat(){
+ currentConversation=null;
+ document.getElementById("pageTitle").textContent="Nueva conversación";
+ document.getElementById("chatView").classList.remove("hidden");
+ document.getElementById("settingsView").classList.add("hidden");
+ document.getElementById("messages").innerHTML=`
+ <div class="welcome" id="welcome">
+ <div class="logo">NEXUS<span>AI</span></div>
+ <h1>¿En qué puedo ayudarte?</h1><p>Pregunta, aprende, crea y descubre.</p>
+ <div class="suggestions">
+ <button class="suggestion" onclick="suggest('Explícame un tema difícil paso a paso')">✦ Explícame algo complicado</button>
+ <button class="suggestion" onclick="suggest('Ayúdame a crear una página web')">⌘ Crear una página web</button>
+ <button class="suggestion" onclick="suggest('Dame ideas originales para un proyecto')">◇ Ideas para un proyecto</button>
+ <button class="suggestion" onclick="suggest('Ayúdame a estudiar de forma entretenida')">▤ Ayúdame a estudiar</button>
+ </div></div>`;
+ document.getElementById("messageInput").value="";
+ document.getElementById("sidebar").classList.remove("open");
+ renderHistory();
+}
+function suggest(text){
+ document.getElementById("messageInput").value=text;
+ sendMessage();
+}
+function handleEnter(e){
+ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage()}
+}
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function formatText(text){
+ let safe=escapeHTML(text);
+ safe=safe.replace(/```([\s\S]*?)```/g,(_,code)=>`<pre><code>${code.trim()}</code></pre>`);
+ safe=safe.replace(/`([^`]+)`/g,"<code>$1</code>");
+ safe=safe.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");
+ safe=safe.replace(/\*(.*?)\*/g,"<em>$1</em>");
+ safe=safe.replace(/\n/g,"<br>");
+ return safe;
+}
+function addMessage(role,text){
+ const box=document.getElementById("messages");
+ const welcome=document.getElementById("welcome");if(welcome)welcome.remove();
+ const div=document.createElement("div");div.className="message";
+ const avatar=role==="user"?(currentUser?.username?.[0]||"U").toUpperCase():"N";
+ div.innerHTML=`<div class="avatar">${escapeHTML(avatar)}</div><div class="message-body">${formatText(text)}</div>`;
+ box.appendChild(div);box.scrollTop=box.scrollHeight;
+}
+async function sendMessage(){
+ const input=document.getElementById("messageInput");
+ const message=input.value.trim();if(!message)return;
+ input.value="";input.disabled=true;document.getElementById("sendBtn").disabled=true;
+ addMessage("user",message);
+ const loading=document.createElement("div");loading.className="message";loading.id="loading";
+ loading.innerHTML='<div class="avatar">N</div><div class="message-body muted">NEXUS está pensando...</div>';
+ document.getElementById("messages").appendChild(loading);
+ try{
+  const d=await api("/api/chat",{message,conversationId:currentConversation});
+  currentConversation=d.conversationId;
+  loading.remove();addMessage("assistant",d.reply);
+  updateUsage(d.usage);
+  await loadHistory();
+ }catch(e){
+  loading.remove();addMessage("assistant","**Error:** "+e.message);
+ }finally{
+  input.disabled=false;document.getElementById("sendBtn").disabled=false;input.focus();
+ }
+}
+async function loadHistory(){
+ try{
+  const d=await api("/api/conversations");
+  conversations=d.conversations||[];renderHistory();
+ }catch(e){console.error(e)}
+}
+function renderHistory(){
+ const box=document.getElementById("history");
+ box.innerHTML="";
+ conversations.forEach(c=>{
+  const item=document.createElement("div");item.className="history-item"+(c.id===currentConversation?" active":"");
+  const title=document.createElement("span");title.textContent=c.title||"Conversación";
+  title.onclick=()=>openConversation(c.id);
+  const del=document.createElement("button");del.className="delete-chat";del.textContent="×";del.title="Eliminar conversación";
+  del.onclick=e=>{e.stopPropagation();deleteConversation(c.id)};
+  item.append(title,del);box.appendChild(item);
+ });
+}
+async function openConversation(id){
+ try{
+  const d=await api("/api/conversations/"+encodeURIComponent(id));
+  currentConversation=id;
+  document.getElementById("chatView").classList.remove("hidden");
+  document.getElementById("settingsView").classList.add("hidden");
+  document.getElementById("pageTitle").textContent=d.conversation.title||"Conversación";
+  const box=document.getElementById("messages");box.innerHTML="";
+  (d.messages||[]).forEach(m=>addMessage(m.role,m.content));
+  renderHistory();document.getElementById("sidebar").classList.remove("open");
+ }catch(e){toast(e.message)}
+}
+async function deleteConversation(id){
+ if(!confirm("¿Eliminar esta conversación?"))return;
+ try{
+  await api("/api/conversations/"+encodeURIComponent(id),{action:"delete"});
+  if(currentConversation===id)newChat();
+  await loadHistory();toast("Conversación eliminada");
+ }catch(e){toast(e.message)}
+}
+function showSettings(){
+ document.getElementById("chatView").classList.add("hidden");
+ document.getElementById("settingsView").classList.remove("hidden");
+ document.getElementById("pageTitle").textContent="Ajustes";
+ document.getElementById("sidebar").classList.remove("open");
+ settingsTab("account",document.querySelector(".tab"));
+}
+function settingsTab(name,button){
+ ["account","memory","preferences","admin"].forEach(n=>{
+  document.getElementById(n+"Panel").classList.toggle("hidden",n!==name);
+ });
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+ if(button)button.classList.add("active");
+ if(name==="memory")loadMemory();
+ if(name==="preferences")loadPreferences();
+ if(name==="admin")loadAdminStats();
+}
+async function changePassword(){
+ const currentPassword=document.getElementById("currentPass").value;
+ const newPassword=document.getElementById("newPass").value;
+ try{
+  await api("/api/password",{currentPassword,newPassword});
+  document.getElementById("currentPass").value="";
+  document.getElementById("newPass").value="";
+  toast("Contraseña cambiada correctamente");
+ }catch(e){toast(e.message)}
+}
+async function loadMemory(){
+ try{
+  const d=await api("/api/memory");
+  document.getElementById("memoryText").value=d.content||"";
+ }catch(e){toast(e.message)}
+}
+async function saveMemory(){
+ try{
+  await api("/api/memory",{action:"save",content:document.getElementById("memoryText").value});
+  toast("Memoria guardada");
+ }catch(e){toast(e.message)}
+}
+async function loadPreferences(){
+ try{
+  const d=await api("/api/preferences");
+  document.getElementById("preferencesText").value=d.settings?.instructions||"";
+ }catch(e){toast(e.message)}
+}
+async function savePreferences(){
+ try{
+  const instructions=document.getElementById("preferencesText").value;
+  await api("/api/preferences",{action:"save",settings:{instructions}});
+  toast("Preferencias guardadas");
+ }catch(e){toast(e.message)}
+}
+async function loadAdminStats(){
+ if(!currentUser?.admin)return;
+ const table=document.getElementById("usersTable");
+ table.innerHTML="<tr><td colspan='3'>Cargando...</td></tr>";
+ try{
+  const d=await api("/api/admin/stats");
+  document.getElementById("totalUsers").textContent=d.totalUsers;
+  document.getElementById("maxUsers").textContent=d.maxUsers;
+  document.getElementById("messagesToday").textContent=d.messagesToday;
+  table.innerHTML="";
+  (d.users||[]).forEach(u=>{
+   const tr=document.createElement("tr");
+   const name=document.createElement("td");name.textContent=u.username;
+   const count=document.createElement("td");count.textContent=u.messages_today??0;
+   const actions=document.createElement("td");
+   if(String(u.username).toLowerCase()==="javi"){
+    actions.textContent="Administrador";
+   }else{
+    const btn=document.createElement("button");
+    btn.className="danger";btn.textContent="Eliminar";
+    btn.onclick=()=>deleteAccount(u.id,u.username);
+    actions.appendChild(btn);
+   }
+   tr.append(name,count,actions);table.appendChild(tr);
   });
-
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    if (response.status === 401 && path !== "/api/login" && path !== "/api/register") {
-      token = "";
-      localStorage.removeItem("nexus_token");
-      showAuth();
-    }
-    throw new Error(data.error || `Error del servidor (${response.status})`);
-  }
-
-  return data;
+  if(!d.users?.length)table.innerHTML="<tr><td colspan='3'>No hay cuentas.</td></tr>";
+ }catch(e){
+  table.innerHTML=`<tr><td colspan="3">${escapeHTML(e.message)}</td></tr>`;
+ }
 }
-
-function toast(message) {
-  const el = document.getElementById("toast");
-  el.textContent = message;
-  el.classList.add("show");
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => el.classList.remove("show"), 2800);
+async function deleteAccount(id,username){
+ if(!confirm(`¿Eliminar definitivamente la cuenta "${username}"?\n\nSe borrarán sus conversaciones, memoria, preferencias y sesiones. Esta acción no se puede deshacer.`))return;
+ try{
+  const d=await api("/api/admin/users/"+encodeURIComponent(id),{action:"delete"});
+  toast(d.message||"Cuenta eliminada");
+  await loadAdminStats();
+ }catch(e){toast(e.message)}
 }
-
-function setAuthMode(mode) {
-  authMode = mode;
-  document.getElementById("loginTab").classList.toggle("active", mode === "login");
-  document.getElementById("registerTab").classList.toggle("active", mode === "register");
-  document.getElementById("authSubmit").textContent = mode === "login" ? "Entrar en NEXUS" : "Crear cuenta";
-  document.getElementById("authSwitch").innerHTML = mode === "login"
-    ? '¿No tienes cuenta? <button onclick="setAuthMode(\'register\')">Regístrate</button>'
-    : '¿Ya tienes cuenta? <button onclick="setAuthMode(\'login\')">Inicia sesión</button>';
-  document.getElementById("authPassword").autocomplete = mode === "login" ? "current-password" : "new-password";
-}
-
-document.getElementById("authForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  const button = document.getElementById("authSubmit");
-  button.disabled = true;
-  button.textContent = "Conectando...";
-  try {
-    const username = document.getElementById("authUsername").value.trim();
-    const password = document.getElementById("authPassword").value;
-    const data = await api("/api/" + (authMode === "login" ? "login" : "register"), { username, password });
-    token = data.token;
-    localStorage.setItem("nexus_token", token);
-    await initialize();
-  } catch (error) {
-    toast(error.message);
-  } finally {
-    button.disabled = false;
-    button.textContent = authMode === "login" ? "Entrar en NEXUS" : "Crear cuenta";
-  }
-});
-
-function showAuth() {
-  document.getElementById("authScreen").classList.remove("hidden");
-  document.getElementById("app").classList.add("hidden");
-}
-
-async function initialize() {
-  try {
-    const data = await api("/api/me");
-    currentUser = data.user;
-    document.getElementById("authScreen").classList.add("hidden");
-    document.getElementById("app").classList.remove("hidden");
-    document.getElementById("sidebarUsername").textContent = currentUser.username;
-    document.getElementById("userAvatar").textContent = currentUser.username.slice(0,1).toUpperCase();
-    document.getElementById("sidebarRole").textContent = currentUser.admin ? "Administrador" : "Cuenta personal";
-    document.getElementById("accountName").textContent = currentUser.username;
-    document.getElementById("settingsTabAdmin").classList.toggle("hidden", !currentUser.admin);
-    updateUsage(data.usage);
-    await Promise.all([loadConversations(), loadPreferences()]);
-  } catch (error) {
-    token = "";
-    localStorage.removeItem("nexus_token");
-    showAuth();
-    if (error.message) toast(error.message);
-  }
-}
-
-function updateUsage(usage) {
-  if (!usage) return;
-  const pill = document.getElementById("usagePill");
-  if (usage.unlimited) {
-    pill.textContent = "Uso ilimitado · Admin";
-    document.getElementById("statAdminUsage").textContent = usage.today ?? "—";
-  } else {
-    pill.textContent = `${usage.today} / ${usage.dailyLimit} respuestas`;
-  }
-}
-
-async function logout() {
-  try { await api("/api/logout"); } catch {}
-  token = "";
-  currentUser = null;
-  localStorage.removeItem("nexus_token");
-  location.reload();
-}
-
-function newChat() {
-  currentConversation = null;
-  document.getElementById("messages").innerHTML = "";
-  document.getElementById("welcome").classList.remove("hidden");
-  document.querySelectorAll(".history-item").forEach(el => el.classList.remove("active"));
-  document.getElementById("messageInput").focus();
-  if (innerWidth <= 720) document.getElementById("sidebar").classList.remove("open");
-}
-
-async function loadConversations() {
-  try {
-    const data = await api("/api/conversations");
-    const list = document.getElementById("history");
-    list.innerHTML = "";
-    (data.conversations || []).forEach(conversation => {
-      const item = document.createElement("div");
-      item.className = "history-item" + (conversation.id === currentConversation ? " active" : "");
-      item.textContent = conversation.title || "Nueva conversación";
-      item.title = item.textContent;
-      item.onclick = () => openConversation(conversation.id);
-      list.appendChild(item);
-    });
-  } catch (error) { toast(error.message); }
-}
-
-async function openConversation(id) {
-  try {
-    const data = await api("/api/conversations/" + encodeURIComponent(id));
-    currentConversation = id;
-    document.getElementById("welcome").classList.add("hidden");
-    const area = document.getElementById("messages");
-    area.innerHTML = "";
-    (data.messages || []).forEach(message => addMessage(message.role, message.content));
-    await loadConversations();
-    document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
-    if (innerWidth <= 720) document.getElementById("sidebar").classList.remove("open");
-  } catch (error) { toast(error.message); }
-}
-
-function useSuggestion(text) {
-  document.getElementById("messageInput").value = text;
-  resizeInput(document.getElementById("messageInput"));
-  sendMessage();
-}
-
-function handleInputKey(event) {
-  if (event.key === "Enter" && !event.shiftKey) {
-    event.preventDefault();
-    sendMessage();
-  }
-}
-
-function resizeInput(el) {
-  el.style.height = "auto";
-  el.style.height = Math.min(el.scrollHeight, 180) + "px";
-}
-
-function addMessage(role, content) {
-  document.getElementById("welcome").classList.add("hidden");
-  const area = document.getElementById("messages");
-  const wrapper = document.createElement("div");
-  wrapper.className = "message " + role;
-
-  const avatar = document.createElement("div");
-  avatar.className = "message-avatar";
-  avatar.textContent = role === "assistant" ? "N" : (currentUser?.username?.slice(0,1).toUpperCase() || "U");
-
-  const body = document.createElement("div");
-  body.className = "message-body";
-
-  const name = document.createElement("div");
-  name.className = "message-name";
-  name.textContent = role === "assistant" ? "NEXUS" : currentUser?.username || "Tú";
-
-  const bubble = document.createElement("div");
-  bubble.className = "bubble";
-  bubble.innerHTML = role === "assistant" ? renderMarkdown(content) : escapeHTML(content).replace(/\n/g, "<br>");
-
-  body.append(name, bubble);
-
-  if (role === "assistant") {
-    const copy = document.createElement("button");
-    copy.className = "copy-btn";
-    copy.textContent = "Copiar respuesta";
-    copy.onclick = () => {
-      navigator.clipboard.writeText(content).then(() => toast("Respuesta copiada"));
-    };
-    body.appendChild(copy);
-  }
-
-  wrapper.append(avatar, body);
-  area.appendChild(wrapper);
-  return wrapper;
-}
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, c => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-  }[c]));
-}
-
-function renderMarkdown(text) {
-  let s = escapeHTML(text);
-  const blocks = [];
-  s = s.replace(/```([\w-]*)\n?([\s\S]*?)```/g, (_, lang, code) => {
-    const key = "BLOCK" + blocks.length + "END";
-    blocks.push(`<pre><code>${code.trim()}</code></pre>`);
-    return key;
-  });
-  s = s.replace(/^### (.*)$/gm, "<h3>$1</h3>")
-       .replace(/^## (.*)$/gm, "<h2>$1</h2>")
-       .replace(/^# (.*)$/gm, "<h1>$1</h1>")
-       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-       .replace(/\*(.*?)\*/g, "<em>$1</em>")
-       .replace(/`([^`]+)`/g, "<code>$1</code>")
-       .replace(/\[([^\]]+)\]\((https?:\/\/[^ )]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  s = s.split(/\n{2,}/).map(part => {
-    if (/^<(h[1-3]|ul|ol|pre|blockquote)/.test(part)) return part;
-    return "<p>" + part.replace(/\n/g, "<br>") + "</p>";
-  }).join("");
-  blocks.forEach((block, i) => { s = s.replace("BLOCK" + i + "END", block); });
-  return s;
-}
-
-async function sendMessage() {
-  if (isSending) return;
-  const input = document.getElementById("messageInput");
-  const message = input.value.trim();
-  if (!message) return;
-
-  isSending = true;
-  document.getElementById("sendBtn").disabled = true;
-  input.value = "";
-  resizeInput(input);
-  addMessage("user", message);
-
-  const area = document.getElementById("messages");
-  const typing = document.createElement("div");
-  typing.className = "message assistant";
-  typing.innerHTML = '<div class="message-avatar">N</div><div class="message-body"><div class="message-name">NEXUS está pensando</div><div class="typing"><i></i><i></i><i></i></div></div>';
-  area.appendChild(typing);
-  document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
-
-  try {
-    const data = await api("/api/chat", { message, conversationId: currentConversation });
-    typing.remove();
-    currentConversation = data.conversationId || currentConversation;
-    addMessage("assistant", data.reply);
-    updateUsage(data.usage);
-    await loadConversations();
-  } catch (error) {
-    typing.remove();
-    addMessage("assistant", "No he podido completar la solicitud.\n\n" + error.message);
-  } finally {
-    isSending = false;
-    document.getElementById("sendBtn").disabled = false;
-    input.focus();
-    document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
-  }
-}
-
-function openSettings() {
-  document.getElementById("settingsOverlay").classList.add("show");
-  settingsTab("general");
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove("show");
-}
-
-function overlayClose(event, id) {
-  if (event.target.id === id) closeModal(id);
-}
-
-function settingsTab(tab) {
-  ["general","memory","account","admin"].forEach(name => {
-    document.getElementById("settings" + name[0].toUpperCase() + name.slice(1)).classList.toggle("hidden", name !== tab);
-    const button = document.getElementById("settingsTab" + name[0].toUpperCase() + name.slice(1));
-    if (button) button.classList.toggle("active", name === tab);
-  });
-  if (tab === "memory") loadMemory();
-  if (tab === "admin") loadAdminStats();
-}
-
-async function loadPreferences() {
-  try {
-    const data = await api("/api/preferences");
-    preferences = data.settings || {};
-    document.getElementById("prefPersonality").value = preferences.personality || "balanced";
-    document.getElementById("prefLength").value = preferences.length || "balanced";
-    document.getElementById("prefTheme").value = preferences.theme || "dark";
-    applyTheme();
-  } catch (error) { toast(error.message); }
-}
-
-async function savePreferences() {
-  preferences = {
-    ...preferences,
-    personality: document.getElementById("prefPersonality").value,
-    length: document.getElementById("prefLength").value,
-    theme: document.getElementById("prefTheme").value
-  };
-  try {
-    await api("/api/preferences", { action: "save", settings: preferences });
-    applyTheme();
-    toast("Preferencias guardadas");
-  } catch (error) { toast(error.message); }
-}
-
-function applyTheme() {
-  if (preferences.theme === "midnight") {
-    document.documentElement.style.setProperty("--bg", "#090d18");
-    document.documentElement.style.setProperty("--panel", "#111827");
-  } else {
-    document.documentElement.style.setProperty("--bg", "#101018");
-    document.documentElement.style.setProperty("--panel", "#171721");
-  }
-}
-
-async function loadMemory() {
-  try {
-    const data = await api("/api/memory");
-    document.getElementById("memoryText").value = data.content || "";
-  } catch (error) { toast(error.message); }
-}
-
-async function saveMemory() {
-  try {
-    await api("/api/memory", { action: "save", content: document.getElementById("memoryText").value });
-    toast("Memoria guardada");
-  } catch (error) { toast(error.message); }
-}
-
-async function clearMemory() {
-  if (!confirm("¿Quieres borrar toda tu memoria guardada?")) return;
-  document.getElementById("memoryText").value = "";
-  await saveMemory();
-}
-
-async function changePassword() {
-  const currentPassword = document.getElementById("currentPassword").value;
-  const newPassword = document.getElementById("newPassword").value;
-  if (newPassword.length < 8) return toast("La nueva contraseña debe tener al menos 8 caracteres.");
-  try {
-    await api("/api/password", { currentPassword, newPassword });
-    document.getElementById("currentPassword").value = "";
-    document.getElementById("newPassword").value = "";
-    toast("Contraseña actualizada correctamente");
-  } catch (error) { toast(error.message); }
-}
-
-async function loadAdminStats() {
-  if (!currentUser?.admin) return;
-  document.getElementById("adminUsers").innerHTML = '<tr><td colspan="3">Cargando...</td></tr>';
-  try {
-    const [stats, me] = await Promise.all([
-      api("/api/admin/stats"),
-      api("/api/me")
-    ]);
-
-    document.getElementById("statUsers").textContent = `${stats.totalUsers} / ${stats.maxUsers}`;
-    document.getElementById("statMessages").textContent = stats.messagesToday;
-    document.getElementById("statLimit").textContent = stats.normalDailyLimit;
-    document.getElementById("statAdminUsage").textContent = me.usage?.today ?? "—";
-
-    const percentage = stats.maxUsers ? Math.min(100, stats.totalUsers / stats.maxUsers * 100) : 0;
-    document.getElementById("userProgress").style.width = percentage + "%";
-    document.getElementById("userProgressText").textContent = `${stats.totalUsers} de ${stats.maxUsers} cuentas ocupadas · ${Math.max(0, stats.maxUsers - stats.totalUsers)} disponibles`;
-
-    document.getElementById("providerQuota").textContent = stats.providerQuota || "No disponible";
-    document.getElementById("providerQuotaDetail").textContent = "Datos de consumo del proveedor no conectados todavía.";
-
-    const tbody = document.getElementById("adminUsers");
-    tbody.innerHTML = "";
-    (stats.users || []).forEach(user => {
-      const tr = document.createElement("tr");
-      const tdName = document.createElement("td");
-      const tdCount = document.createElement("td");
-      const tdStatus = document.createElement("td");
-      tdName.textContent = user.username;
-      tdCount.textContent = user.messages_today;
-      tdStatus.innerHTML = '<span class="status-dot"></span>Activo';
-      tr.append(tdName, tdCount, tdStatus);
-      tbody.appendChild(tr);
-    });
-    if (!stats.users?.length) tbody.innerHTML = '<tr><td colspan="3">No hay usuarios.</td></tr>';
-  } catch (error) {
-    document.getElementById("adminUsers").innerHTML = `<tr><td colspan="3">${escapeHTML(error.message)}</td></tr>`;
-    toast(error.message);
-  }
-}
-
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("open");
-}
-
-if (token) initialize();
-else showAuth();
+checkSession();
 </script>
 </body>
 </html>
-
