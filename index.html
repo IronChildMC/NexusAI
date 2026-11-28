@@ -202,6 +202,25 @@
 <script>
 const API_URL="https://nexus-ai.jacogalcraft.workers.dev";
 let token=localStorage.getItem("nexus_token")||"";
+let nexusDeviceIdCache="";
+
+// Identificador persistente del navegador: el Worker lo usa para su sistema de seguridad.
+function getNexusDeviceId(){
+ try{
+  let id=localStorage.getItem("nexus_device_id");
+  if(id&&id.length>=16)return id;
+  id=window.crypto?.randomUUID?.()||("nexus-"+Date.now()+"-"+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2));
+  localStorage.setItem("nexus_device_id",id);
+  nexusDeviceIdCache=id;
+  return id;
+ }catch(error){
+  if(!nexusDeviceIdCache){
+   nexusDeviceIdCache=window.crypto?.randomUUID?.()||("nexus-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+  }
+  return nexusDeviceIdCache;
+ }
+}
+
 let currentUser=null;
 let currentConversation=null;
 let conversations=[];
@@ -222,7 +241,11 @@ function saveSelectedModel(){const el=document.getElementById("modelSelect");if(
 async function api(path,data={}){
  const response=await fetch(API_URL+path,{
   method:"POST",
-  headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
+  headers:{
+   "Content-Type":"application/json",
+   "Authorization":"Bearer "+token,
+   "X-Nexus-Device":getNexusDeviceId()
+  },
   body:JSON.stringify(data)
  });
  let result={};
@@ -234,7 +257,10 @@ async function api(path,data={}){
 async function apiUpload(path,formData){
  const response=await fetch(API_URL+path,{
   method:"POST",
-  headers:{"Authorization":"Bearer "+token},
+  headers:{
+   "Authorization":"Bearer "+token,
+   "X-Nexus-Device":getNexusDeviceId()
+  },
   body:formData
  });
  let result={};
@@ -338,7 +364,10 @@ async function login(){
  try{
   const r=await fetch(API_URL+"/api/login",{
    method:"POST",
-   headers:{"Content-Type":"application/json"},
+   headers:{
+    "Content-Type":"application/json",
+    "X-Nexus-Device":getNexusDeviceId()
+   },
    body:JSON.stringify({username,password})
   });
   const d=await r.json();
@@ -355,7 +384,10 @@ async function register(){
  try{
   const r=await fetch(API_URL+"/api/register",{
    method:"POST",
-   headers:{"Content-Type":"application/json"},
+   headers:{
+    "Content-Type":"application/json",
+    "X-Nexus-Device":getNexusDeviceId()
+   },
    body:JSON.stringify({username,password})
   });
   const d=await r.json();
@@ -363,7 +395,7 @@ async function register(){
   token=d.token;
   localStorage.setItem("nexus_token",token);
   await startApp(d.user,d.usage);
- }catch(e){toast(e.message||"No se pudo crear la cuenta")}
+ }catch(e){toast(e.message||"No se pudo crear una cuenta")}
 }
 
 async function startApp(user,usage){
@@ -453,7 +485,7 @@ function handleEnter(e){
 }
 
 function escapeHTML(s){
- return String(s).replace(/[&<>"']/g,c=>({
+ return String(s).replace(/[&<>\"']/g,c=>({
   "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
  }[c]));
 }
