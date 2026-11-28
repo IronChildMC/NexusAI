@@ -10,9 +10,29 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 75% -15%,#29204d 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.01em}button,input,textarea,select{font:inherit}button{cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease}button:hover{transform:translateY(-1px)}button:active{transform:translateY(0) scale(.98)}.hidden{display:none!important}
 #auth{min-height:100vh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 15%,#33245f 0,transparent 50%),linear-gradient(145deg,#080910,#0d0b18 55%,#090a12)}#auth:before,#auth:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;filter:blur(85px);opacity:.2;pointer-events:none;animation:floatGlow 12s ease-in-out infinite alternate}#auth:before{background:#855dff;top:-180px;left:-120px}#auth:after{background:#2bbed8;right:-170px;bottom:-220px;animation-delay:-5s}@keyframes floatGlow{to{transform:translate(65px,45px) scale(1.18)}}.auth-card{position:relative;z-index:1;width:min(440px,100%);background:linear-gradient(145deg,#171827ed,#10121ced);border:1px solid #ffffff18;border-radius:26px;padding:38px;box-shadow:var(--shadow);backdrop-filter:blur(24px);animation:riseIn .7s cubic-bezier(.2,.8,.2,1) both}.logo{font-size:30px;font-weight:900;letter-spacing:3px}.logo span,.brand span{color:var(--accent)}.sub{color:var(--muted);font-size:13px;margin:9px 0 28px}.field{width:100%;padding:14px 15px;background:#0b0d16;border:1px solid var(--line);border-radius:12px;color:white;outline:none;margin:7px 0;transition:border .2s,box-shadow .2s}.field:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #9b7bff20}.primary{background:linear-gradient(115deg,var(--accent),var(--accent2));color:white;border:0;border-radius:11px;padding:12px 18px;font-weight:750;box-shadow:0 8px 24px #7958ed30}.primary:hover{box-shadow:0 12px 32px #7958ed55}.primary:disabled{opacity:.45;cursor:not-allowed;transform:none}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:11px 15px}.danger{background:#391923;color:#ff8798;border:1px solid #6c293a;border-radius:9px;padding:9px 12px}.auth-card button{width:100%;margin-top:12px}.switch{color:var(--muted);font-size:13px;text-align:center;margin-top:18px}.switch a{color:#c3b4ff;cursor:pointer}
 #app{height:100vh;display:flex;overflow:hidden;animation:fadeIn .45s ease both}.sidebar{width:278px;flex-shrink:0;background:#0d0f18ed;border-right:1px solid #ffffff10;display:flex;flex-direction:column;padding:20px 14px;backdrop-filter:blur(20px);z-index:3}.brand{font-size:22px;font-weight:900;letter-spacing:2px;padding:5px 10px 24px}.newchat{width:100%;text-align:left;background:linear-gradient(110deg,#292044,#1a1b2b);color:#e0d8ff;border:1px solid #4b3b76;border-radius:12px;padding:13px;margin-bottom:20px;box-shadow:inset 0 1px #ffffff12}.newchat:hover{border-color:var(--accent);box-shadow:0 8px 26px #7958ed20}.section-label{font-size:10px;color:#777b91;font-weight:850;letter-spacing:1.6px;padding:8px 10px}#history{overflow:auto;flex:1}.history-item{display:flex;align-items:center;gap:7px;padding:10px;border-radius:10px;color:#b9bbca;font-size:13px;cursor:pointer;margin:3px 0;transition:background .2s,color .2s}.history-item:hover,.history-item.active{background:#ffffff0b;color:white}.history-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.delete-chat{border:0;background:none;color:#777;font-size:17px}.userbox{border-top:1px solid var(--line);padding:15px 7px 3px;display:flex;align-items:center;gap:10px}.avatar{width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#46356f,#25233c);display:grid;place-items:center;color:#d2c7ff;font-weight:850;flex-shrink:0}.userinfo{flex:1;min-width:0}.userinfo b{font-size:13px;display:block;overflow:hidden;text-overflow:ellipsis}.userinfo small{color:var(--muted);font-size:11px}.iconbtn{background:none;border:0;color:#a6a8b8;padding:8px;border-radius:9px}.iconbtn:hover{background:#ffffff10;color:white}.main{flex:1;min-width:0;display:flex;flex-direction:column;background:linear-gradient(180deg,#0b0c14aa,#080910)}.topbar{height:64px;border-bottom:1px solid #ffffff0d;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:#0b0c14a8;backdrop-filter:blur(14px)}.topbar-title{font-size:14px;font-weight:750}.status{font-size:11px;color:var(--green)}#messages{flex:1;overflow:auto;padding:32px 20px;scroll-behavior:smooth}.welcome{max-width:780px;margin:9vh auto 0;text-align:center;animation:riseIn .65s ease both}.welcome .logo{font-size:22px;color:#ded6ff}.welcome h1{font-size:clamp(30px,5vw,46px);letter-spacing:-1.8px;margin:15px 0 9px;background:linear-gradient(100deg,#fff,#c8b9ff 60%,#8de6f1);background-clip:text;color:transparent}.welcome p{color:var(--muted)}.suggestions{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:32px}.suggestion{padding:16px;text-align:left;background:linear-gradient(145deg,#151725,#10121c);border:1px solid #ffffff12;border-radius:14px;color:#d1d0e2}.suggestion:hover{border-color:#8066d5;background:#1a1930;box-shadow:0 10px 30px #0003}.message{max-width:900px;margin:0 auto 27px;display:flex;gap:14px;line-height:1.75;animation:messageIn .35s ease both}.message .avatar{flex-shrink:0}.message-body{min-width:0;flex:1;overflow-wrap:anywhere;padding-top:3px}.message-body pre{background:#080a11;border:1px solid var(--line);border-radius:12px;padding:15px;overflow:auto}.message-body code{font-family:Consolas,monospace;font-size:13px}.message-body p{margin:0 0 10px}.message-body img{max-width:min(100%,560px);border-radius:15px;border:1px solid #ffffff18;display:block;margin-top:12px}.composer-wrap{padding:12px 20px 21px;background:linear-gradient(0deg,#080910 72%,transparent)}.composer{max-width:900px;margin:auto;background:#151725;border:1px solid #34354e;border-radius:18px;padding:10px;display:flex;align-items:flex-end;gap:10px;box-shadow:0 12px 45px #0004;transition:border .2s,box-shadow .2s}.composer:focus-within{border-color:#8c70e8;box-shadow:0 0 0 3px #9b7bff14,0 12px 45px #0005}.composer textarea{flex:1;resize:none;max-height:180px;min-height:45px;background:none;border:0;color:white;outline:none;padding:11px}.send{width:44px;height:44px;border:0;border-radius:13px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;font-size:19px;box-shadow:0 5px 18px #7958ed35}.disclaimer{text-align:center;color:#696d80;font-size:10px;margin-top:10px}.panel{max-width:1080px;width:100%;margin:0 auto;padding:34px 25px;overflow:auto;animation:fadeIn .35s ease}.panel h1{font-size:27px;margin:0 0 7px;letter-spacing:-.7px}.muted{color:var(--muted);font-size:13px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:25px 0}.tab{padding:10px 15px;background:#141622;border:1px solid var(--line);border-radius:10px;color:#aaa}.tab.active{background:#292143;border-color:#7256bc;color:#e3d9ff;box-shadow:0 5px 18px #7958ed18}.card{background:linear-gradient(145deg,#141622,#10121b);border:1px solid #ffffff12;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 8px 30px #0002;animation:riseIn .35s ease both}.card h3{margin:0 0 12px;font-size:15px}.card textarea{width:100%;min-height:130px;resize:vertical;background:#0b0d15;border:1px solid var(--line);border-radius:11px;padding:13px;color:white;outline:none}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.stat{background:linear-gradient(145deg,#171a29,#11131d);border:1px solid #ffffff12;border-radius:15px;padding:18px;transition:transform .2s,border .2s}.stat:hover{transform:translateY(-3px);border-color:#765bc0}.stat strong{font-size:27px;display:block;margin-top:7px}.stat small{color:var(--muted)}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-size:11px}.account-actions{display:flex;gap:7px;align-items:center}.gift-select{background:#0b0d15;color:white;border:1px solid var(--line);border-radius:8px;padding:8px;max-width:75px}.gift-btn{background:#292143;color:#d9d0ff;border:1px solid #55428a;border-radius:8px;padding:9px 11px}.gift-btn:hover{background:#382b5c}.gift-btn:disabled{opacity:.4;cursor:not-allowed}.gift-status{color:var(--green);font-size:11px;display:block;margin-top:4px}.pending-gift{color:#c6b6ff;font-size:12px}.empty{color:var(--muted);text-align:center;padding:35px}#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#222438ee;border:1px solid #ffffff24;padding:13px 19px;border-radius:12px;z-index:20;display:none;font-size:13px;max-width:90%;text-align:center;box-shadow:var(--shadow);backdrop-filter:blur(16px);animation:toastIn .25s ease}.composer-tools{max-width:900px;margin:0 auto 9px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.tool-btn{background:#171a27;border:1px solid #303247;color:#c9c4e8;border-radius:10px;padding:8px 11px;font-size:12px}.tool-btn:hover{border-color:var(--accent);background:#211c37}.tool-btn:disabled{opacity:.45;cursor:not-allowed}.file-status{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:min(360px,100%)}.generated-image{max-width:min(100%,560px);border-radius:14px;margin-top:10px;border:1px solid #303247;display:block}.model-select{background:#171a27;color:#eee;border:1px solid #39334f;border-radius:10px;padding:8px 10px;font-size:12px;outline:none}.model-hint{font-size:11px;color:var(--muted);padding:0 2px}.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:26px 0}.model-card{border:1px solid #ffffff15;background:#141622;border-radius:13px;padding:14px;text-align:left;color:#eee}.model-card b{display:block;margin-bottom:5px}.model-card small{color:var(--muted)}.model-card:hover{border-color:var(--accent);transform:translateY(-3px)}#mobileMenu{display:none}@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes messageIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}@keyframes toastIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
-#banScreen{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 10%,#442044 0,transparent 48%),#080910}.ban-card{width:min(520px,100%);padding:36px;border:1px solid #ff718b55;border-radius:22px;background:linear-gradient(145deg,#1b1420,#10121d);box-shadow:0 25px 100px #000b;text-align:center;animation:riseIn .45s ease both}.ban-mark{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;margin:0 auto 20px;background:#512132;color:#ff9baa;font-size:25px;font-weight:900}.ban-card h1{font-size:27px;margin:0 0 12px}.ban-card p{color:#c4bfd0;line-height:1.65;font-size:14px}.ban-reason{margin:18px 0;padding:14px;border:1px solid #704050;border-radius:12px;background:#2a1822;color:#ffb5c0!important}.ban-note{font-size:12px!important;color:#89869a!important}@media(prefers-reduced-motion:reduce){.ban-card{animation:none}}
-@media(max-width:760px){.sidebar{position:fixed;z-index:15;left:-290px;top:0;bottom:0;transition:left .28s cubic-bezier(.2,.8,.2,1);box-shadow:var(--shadow)}.sidebar.open{left:0}#mobileMenu{display:inline-block}.stats{grid-template-columns:1fr}.welcome{margin:5vh auto 0}.welcome h1{font-size:32px}.suggestions{grid-template-columns:1fr;margin-top:24px}.suggestion{min-height:55px}.topbar{padding:0 14px}.panel{padding:24px 15px}#messages{padding:22px 12px}.composer-wrap{padding:10px 11px 14px}.pref-grid{grid-template-columns:1fr}.auth-card{padding:27px}.message{gap:9px}.message .avatar{width:31px;height:31px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* MICROINTERACCIONES Y ANIMACIONES NEXUS */
+@keyframes panelSwipeIn{from{opacity:0;transform:translate3d(26px,0,0);filter:blur(3px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
+@keyframes wordReveal{from{opacity:0;transform:translateY(5px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes dotPulse{0%,60%,100%{opacity:.22;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes softPulse{0%,100%{box-shadow:0 0 0 0 #9b7bff00}50%{box-shadow:0 0 0 5px #9b7bff12}}
+@keyframes tabPop{from{opacity:0;transform:translateX(15px) scale(.99)}to{opacity:1;transform:translateX(0) scale(1)}}
+.panel{animation:panelSwipeIn .42s cubic-bezier(.2,.8,.2,1) both}
+.card{transform-origin:top center}
+.tabs .tab{transition:transform .2s,background .2s,border-color .2s}
+.tabs .tab.active{animation:softPulse 1.8s ease-in-out infinite}
+#accountPanel,#memoryPanel,#preferencesPanel,#adminPanel{animation:tabPop .32s cubic-bezier(.2,.8,.2,1) both}
+.message .word{display:inline-block;animation:wordReveal .16s ease both;animation-delay:var(--word-delay,0ms)}
+.thinking-indicator{display:inline-flex;align-items:center;gap:4px;color:#c4bddf}
+.thinking-dots{display:inline-flex;gap:3px;margin-left:2px;vertical-align:middle}
+.thinking-dots span{font-size:17px;font-weight:900;color:#b9a5ff;animation:dotPulse 1.05s ease-in-out infinite}
+.thinking-dots span:nth-child(2){animation-delay:.15s}.thinking-dots span:nth-child(3){animation-delay:.3s}
+.bug-report{display:block;width:fit-content!important;margin:17px auto 0!important;padding:6px 9px!important;background:transparent!important;border:0!important;color:#85869b!important;font-size:11px!important;text-decoration:none;cursor:pointer;box-shadow:none!important}
+.bug-report:hover{color:#c7b5ff!important;text-decoration:underline}
+.bug-report span{color:#aa91ff}
+@media(prefers-reduced-motion:reduce){.message .word,.tabs .tab.active{animation:none!important}}
+@media(max-width:850px){.sidebar{width:250px}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.sidebar{position:fixed;z-index:10;left:-285px;top:0;bottom:0;transition:left .28s cubic-bezier(.2,.8,.2,1);box-shadow:var(--shadow)}.sidebar.open{left:0}#mobileMenu{display:inline-block}.stats{grid-template-columns:1fr}.welcome{margin-top:6vh}.welcome h1{font-size:31px}.suggestions{grid-template-columns:1fr}.model-grid{grid-template-columns:1fr}#messages{padding:20px 12px}.panel{padding:24px 15px}.topbar{padding:0 13px}.composer-wrap{padding:10px 10px 16px}.auth-card{padding:28px 23px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -35,6 +55,7 @@
    <button class="primary" onclick="register()">Registrarme</button>
    <div class="switch">¿Ya tienes cuenta? <a onclick="showLogin()">Iniciar sesión</a></div>
   </div>
+  <button class="bug-report" type="button" onclick="reportBug()">¿Has encontrado un error? <span>Informar de un bug</span></button>
  </div>
 </section>
 
@@ -58,7 +79,7 @@
     <button class="iconbtn" id="mobileMenu" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
     <div class="topbar-title" id="pageTitle">Nueva conversación</div>
    </div>
-   <div class="status">NEXUS conectado</div>
+   <div class="status">● NEXUS conectado</div>
   </header>
 
   <section id="chatView" style="display:flex;flex:1;min-height:0;flex-direction:column">
@@ -73,9 +94,9 @@
       <button class="suggestion" onclick="suggest('Dame ideas originales para un proyecto')">◇ Ideas para un proyecto</button>
       <button class="suggestion" onclick="suggest('Ayúdame a estudiar de forma entretenida')">▤ Ayúdame a estudiar</button>
      </div>
+     <button class="bug-report" type="button" onclick="reportBug()">¿Algo no funciona bien? <span>Informar de un bug</span></button>
     </div>
    </div>
-
    <div class="composer-wrap">
     <div class="composer-tools">
      <select id="modelSelect" class="model-select" onchange="saveSelectedModel()" aria-label="Modelo de inteligencia artificial">
@@ -110,11 +131,6 @@
      <h3>Tu cuenta</h3>
      <p class="muted">Usuario: <b id="settingsUsername"></b></p>
      <p class="muted" id="usageText"></p>
-    </div>
-    <div class="card">
-     <h3>Estado de seguridad</h3>
-     <p class="muted" id="safetyStatus">Sin avisos de seguridad.</p>
-     <p class="muted">Las restricciones se aplican automáticamente según los avisos registrados.</p>
     </div>
     <div class="card">
      <h3>Cambiar contraseña</h3>
@@ -162,16 +178,19 @@
      <div class="table-wrap">
       <table>
        <thead>
-        <tr><th>Usuario</th><th>Avisos</th><th>Restricciones</th><th>Usos hoy</th><th>Extra disponible</th><th>Imágenes</th><th>Archivos</th><th>Regalar</th><th>Acciones</th></tr>
+        <tr>
+         <th>Usuario</th>
+         <th>Usos hoy</th>
+         <th>Extra disponible</th>
+         <th>Imágenes</th>
+         <th>Archivos</th>
+         <th>Regalar</th>
+         <th>Acciones</th>
+        </tr>
        </thead>
-       <tbody id="usersTable"><tr><td colspan="9">Cargando...</td></tr></tbody>
+       <tbody id="usersTable"><tr><td colspan="7">Cargando...</td></tr></tbody>
       </table>
      </div>
-    </div>
-    <div class="card">
-     <h3>Navegadores bloqueados</h3>
-     <p class="muted">Al retirar un bloqueo, la cuenta eliminada no se recupera: la persona tendrá que registrarse de nuevo y dependerá de que queden plazas.</p>
-     <div class="table-wrap"><table><thead><tr><th>Cuenta eliminada</th><th>Motivo</th><th>Fecha</th><th>Acción</th></tr></thead><tbody id="bannedDevicesTable"><tr><td colspan="4">Cargando...</td></tr></tbody></table></div>
     </div>
    </div>
   </section>
@@ -180,26 +199,8 @@
 
 <div id="toast"></div>
 
-<section id="banScreen" class="hidden" aria-live="assertive">
- <div class="ban-card">
-  <div class="ban-mark">N</div>
-  <h1>Navegador bloqueado</h1>
-  <p>Este navegador ha sido bloqueado después de alcanzar tres avisos de seguridad.</p>
-  <p><b>Cuenta:</b> <span id="banUsername">—</span></p>
-  <p class="ban-reason" id="banReason">Motivo no disponible.</p>
-  <p>La cuenta anterior ha sido eliminada. Si administración retira el bloqueo, tendrás que crear una cuenta nueva. La creación dependerá de que queden plazas disponibles.</p>
-  <p class="ban-note">Si crees que se trata de un error, contacta con la persona que administra NEXUS AI.</p>
- </div>
-</section>
 <script>
 const API_URL="https://nexus-ai.jacogalcraft.workers.dev";
-const DEVICE_STORAGE_KEY="nexus_device_id";
-let deviceId=localStorage.getItem(DEVICE_STORAGE_KEY)||"";
-if(!deviceId){
- deviceId=crypto.randomUUID?crypto.randomUUID():"nx-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2);
- localStorage.setItem(DEVICE_STORAGE_KEY,deviceId);
-}
-let currentSafety={warnings:0,restrictionLevel:0,restrictionsActive:false,imagesBlocked:false,giftsBlocked:false,advancedModelsBlocked:false};
 let token=localStorage.getItem("nexus_token")||"";
 let currentUser=null;
 let currentConversation=null;
@@ -209,58 +210,36 @@ let pendingFileName="";
 let selectedModel=(["lite","smart","ultra"].includes(localStorage.getItem("nexus_model"))?localStorage.getItem("nexus_model"):"smart");
 const MODEL_COSTS={lite:1,smart:2,ultra:4};
 const MODEL_LABELS={lite:"NEXUS Lite",smart:"NEXUS Smart",ultra:"NEXUS Ultra"};
-
 function syncModelUI(){
  const select=document.getElementById("modelSelect");
  if(select)select.value=selectedModel;
  const hint=document.getElementById("modelHint");
  if(hint)hint.textContent=(selectedModel==="lite"?"Rápido":selectedModel==="ultra"?"Avanzado":"Equilibrado")+" · "+MODEL_COSTS[selectedModel]+" uso(s) por respuesta";
 }
-
-function chooseModel(model){
- if(!MODEL_COSTS[model])return;
- if(currentSafety.advancedModelsBlocked&&model!=="lite"){
-  toast("Por tu segundo aviso solo puedes utilizar NEXUS Lite.");
-  return;
- }
- selectedModel=model;
- localStorage.setItem("nexus_model",model);
- syncModelUI();
- toast(MODEL_LABELS[model]+" seleccionado");
-}
-
-function saveSelectedModel(){
- const el=document.getElementById("modelSelect");
- if(el)chooseModel(el.value);
-}
+function chooseModel(model){if(!MODEL_COSTS[model])return;selectedModel=model;localStorage.setItem("nexus_model",model);syncModelUI();toast(MODEL_LABELS[model]+" seleccionado");}
+function saveSelectedModel(){const el=document.getElementById("modelSelect");if(el)chooseModel(el.value);}
 
 async function api(path,data={}){
  const response=await fetch(API_URL+path,{
   method:"POST",
-  headers:{"Content-Type":"application/json","Authorization":"Bearer "+token,"X-Nexus-Device":deviceId},
+  headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
   body:JSON.stringify(data)
  });
  let result={};
  try{result=await response.json()}catch{}
- if(!response.ok){
-  if(result.banned)blockBrowser(result);
-  throw new Error(result.error||"Error de conexión");
- }
+ if(!response.ok)throw new Error(result.error||"Error de conexión");
  return result;
 }
 
 async function apiUpload(path,formData){
  const response=await fetch(API_URL+path,{
   method:"POST",
-  headers:{"Authorization":"Bearer "+token,"X-Nexus-Device":deviceId},
+  headers:{"Authorization":"Bearer "+token},
   body:formData
  });
  let result={};
  try{result=await response.json()}catch{}
- if(!response.ok){
-  if(result.banned)blockBrowser(result);
-  throw new Error(result.error||"Error de conexión");
- }
+ if(!response.ok)throw new Error(result.error||"Error de conexión");
  return result;
 }
 
@@ -301,16 +280,8 @@ async function generateImage(){
  const button=document.getElementById("imageBtn");
  button.disabled=true;
  button.textContent="Generando imagen...";
-
  try{
   const data=await api("/api/images/generate",{prompt:prompt.trim()});
-
-  if(data.moderationNotice){
-   applySafetyUI(data.safety);
-   addMessage("assistant",data.moderationNotice+"\n\nMotivo registrado: "+data.reason+"\nAvisos acumulados: "+data.warningCount+"/3.");
-   return;
-  }
-
   updateUsage(data.usage);
 
   const box=document.getElementById("messages");
@@ -338,7 +309,8 @@ async function generateImage(){
  }catch(error){
   toast(error.message);
  }finally{
-  applySafetyUI(currentSafety);
+  button.disabled=false;
+  button.textContent="✦ Crear imagen · 10 usos";
  }
 }
 
@@ -363,57 +335,39 @@ function showRegister(){
 async function login(){
  const username=document.getElementById("loginUser").value.trim();
  const password=document.getElementById("loginPass").value;
-
  try{
   const r=await fetch(API_URL+"/api/login",{
    method:"POST",
-   headers:{"Content-Type":"application/json","X-Nexus-Device":deviceId},
+   headers:{"Content-Type":"application/json"},
    body:JSON.stringify({username,password})
   });
-
   const d=await r.json();
-  if(!r.ok){
-   if(d.banned)blockBrowser(d);
-   throw new Error(d.error);
-  }
-
+  if(!r.ok)throw new Error(d.error);
   token=d.token;
   localStorage.setItem("nexus_token",token);
-  await startApp(d.user,d.usage,d.safety);
- }catch(e){
-  toast(e.message||"No se pudo iniciar sesión");
- }
+  await startApp(d.user,d.usage);
+ }catch(e){toast(e.message||"No se pudo iniciar sesión")}
 }
 
 async function register(){
  const username=document.getElementById("regUser").value.trim();
  const password=document.getElementById("regPass").value;
-
  try{
   const r=await fetch(API_URL+"/api/register",{
    method:"POST",
-   headers:{"Content-Type":"application/json","X-Nexus-Device":deviceId},
+   headers:{"Content-Type":"application/json"},
    body:JSON.stringify({username,password})
   });
-
   const d=await r.json();
-  if(!r.ok){
-   if(d.banned)blockBrowser(d);
-   throw new Error(d.error);
-  }
-
+  if(!r.ok)throw new Error(d.error);
   token=d.token;
   localStorage.setItem("nexus_token",token);
-  await startApp(d.user,d.usage,d.safety);
- }catch(e){
-  toast(e.message||"No se pudo crear la cuenta");
- }
+  await startApp(d.user,d.usage);
+ }catch(e){toast(e.message||"No se pudo crear la cuenta")}
 }
 
-async function startApp(user,usage,safety){
+async function startApp(user,usage){
  currentUser=user;
- currentSafety=safety||currentSafety;
- applySafetyUI(currentSafety);
  document.getElementById("auth").classList.add("hidden");
  document.getElementById("app").classList.remove("hidden");
  document.getElementById("sideUsername").textContent=user.username;
@@ -427,130 +381,33 @@ async function startApp(user,usage,safety){
  newChat();
 }
 
-function applySafetyUI(safety){
- currentSafety=safety||currentSafety;
-
- const imageButton=document.getElementById("imageBtn");
- if(imageButton){
-  imageButton.disabled=!!currentSafety.imagesBlocked;
-  imageButton.textContent=currentSafety.imagesBlocked?"✦ Imágenes restringidas":"✦ Crear imagen · 10 usos";
-  imageButton.title=currentSafety.imagesBlocked?"Restricción por avisos de seguridad":"Generar una imagen";
- }
-
- const modelSelect=document.getElementById("modelSelect");
- if(modelSelect){
-  const smart=modelSelect.querySelector('option[value="smart"]');
-  const ultra=modelSelect.querySelector('option[value="ultra"]');
-
-  if(smart)smart.disabled=!!currentSafety.advancedModelsBlocked;
-  if(ultra)ultra.disabled=!!currentSafety.advancedModelsBlocked;
-
-  if(currentSafety.advancedModelsBlocked&&selectedModel!=="lite"){
-   selectedModel="lite";
-   localStorage.setItem("nexus_model","lite");
-  }
-  syncModelUI();
- }
-
- const status=document.getElementById("safetyStatus");
- if(status){
-  if(currentSafety.warnings>=2){
-   status.textContent="Aviso 2/3: imágenes, regalos y modelos Smart/Ultra restringidos.";
-  }else if(currentSafety.warnings===1&&currentSafety.restrictionsActive){
-   status.textContent="Aviso 1/3: imágenes y regalos restringidos durante 3 días.";
-  }else if(currentSafety.warnings===1){
-   status.textContent="Aviso 1/3 registrado. Las restricciones temporales han terminado.";
-  }else{
-   status.textContent="Sin avisos de seguridad.";
-  }
- }
-}
-
 function updateUsage(usage){
  if(!usage)return;
-
  const el=document.getElementById("usageText");
  if(usage.unlimited){
   el.textContent="Límite diario: ilimitado";
   return;
  }
-
  const today=usage.today??usage.messagesToday??0;
  const dailyLimit=usage.dailyLimit??15;
  const bonus=usage.bonusMessages??usage.bonus_messages??0;
  const remaining=Math.max(0,dailyLimit-today)+bonus;
-
  el.textContent=`Usos utilizados hoy: ${today} / ${dailyLimit} · Extra: ${bonus} · Disponibles: ${remaining}`;
 }
 
 async function checkSession(){
  if(!token)return;
-
  try{
   const d=await api("/api/me");
-  await startApp(d.user,d.usage,d.safety);
- }catch(e){
-  if(localStorage.getItem("nexus_banned"))return;
+  await startApp(d.user,d.usage);
+ }catch{
   token="";
   localStorage.removeItem("nexus_token");
  }
 }
 
-function blockBrowser(data={}){
- const info={
-  username:data.username||"Cuenta eliminada",
-  reason:data.reason||"Tres avisos de seguridad",
-  at:Date.now()
- };
-
- localStorage.setItem("nexus_banned",JSON.stringify(info));
- localStorage.removeItem("nexus_token");
- token="";
-
- document.getElementById("banUsername").textContent=info.username;
- document.getElementById("banReason").textContent=info.reason;
- document.getElementById("auth").classList.add("hidden");
- document.getElementById("app").classList.add("hidden");
- document.getElementById("banScreen").classList.remove("hidden");
- document.body.style.overflow="hidden";
-}
-
-async function initializeNexus(){
- const cached=localStorage.getItem("nexus_banned");
-
- if(cached){
-  try{blockBrowser(JSON.parse(cached));}
-  catch{blockBrowser({});}
- }
-
- try{
-  const response=await fetch(API_URL+"/api/device-status",{
-   method:"POST",
-   headers:{"Content-Type":"application/json","X-Nexus-Device":deviceId},
-   body:"{}"
-  });
-
-  const status=await response.json();
-
-  if(status.banned){
-   blockBrowser(status.ban||status);
-   return;
-  }
-
-  localStorage.removeItem("nexus_banned");
-  document.getElementById("banScreen").classList.add("hidden");
-  document.body.style.overflow="";
-  await checkSession();
- }catch(error){
-  if(!cached)await checkSession();
- }
-}
-
 async function logout(){
- try{
-  if(token)await api("/api/logout");
- }catch{}
-
+ try{if(token)await api("/api/logout")}catch{}
  token="";
  localStorage.removeItem("nexus_token");
  location.reload();
@@ -575,8 +432,9 @@ function newChat(){
   <button class="model-card" onclick="chooseModel('lite')"><b>◈ NEXUS Lite</b><small>Rápido · 1 uso</small></button>
   <button class="model-card" onclick="chooseModel('smart')"><b>✦ NEXUS Smart</b><small>Equilibrado · 2 usos</small></button>
   <button class="model-card" onclick="chooseModel('ultra')"><b>◆ NEXUS Ultra</b><small>Avanzado · 4 usos</small></button>
- </div></div>`;
-
+ </div>
+ <button class="bug-report" type="button" onclick="reportBug()">¿Algo no funciona bien? <span>Informar de un bug</span></button>
+ </div>`;
  document.getElementById("messageInput").value="";
  document.getElementById("sidebar").classList.remove("open");
  renderHistory();
@@ -610,15 +468,37 @@ function formatText(text){
  return safe;
 }
 
+function animateMessageWords(container){
+ const walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT);
+ const nodes=[];
+ while(walker.nextNode())if(walker.currentNode.nodeValue.trim())nodes.push(walker.currentNode);
+ let wordIndex=0;
+ nodes.forEach(node=>{
+  const fragment=document.createDocumentFragment();
+  const parts=node.nodeValue.split(/(\s+)/);
+  parts.forEach(part=>{
+   if(!part)return;
+   if(/^\s+$/.test(part)){fragment.appendChild(document.createTextNode(part));return;}
+   const span=document.createElement("span");
+   span.className="word";
+   span.style.setProperty("--word-delay",Math.min(wordIndex*7,210)+"ms");
+   span.textContent=part;
+   fragment.appendChild(span);
+   wordIndex++;
+  });
+  node.parentNode.replaceChild(fragment,node);
+ });
+}
+
 function addMessage(role,text){
  const box=document.getElementById("messages");
  const welcome=document.getElementById("welcome");
  if(welcome)welcome.remove();
-
  const div=document.createElement("div");
  div.className="message";
  const avatar=role==="user"?(currentUser?.username?.[0]||"U").toUpperCase():"N";
  div.innerHTML=`<div class="avatar">${escapeHTML(avatar)}</div><div class="message-body">${formatText(text)}</div>`;
+ if(role==="assistant")animateMessageWords(div.querySelector(".message-body"));
  box.appendChild(div);
  box.scrollTop=box.scrollHeight;
 }
@@ -627,18 +507,15 @@ async function sendMessage(){
  const input=document.getElementById("messageInput");
  const message=input.value.trim();
  if(!message)return;
-
  input.value="";
  input.disabled=true;
  document.getElementById("sendBtn").disabled=true;
  addMessage("user",message);
-
  const loading=document.createElement("div");
  loading.className="message";
  loading.id="loading";
- loading.innerHTML='<div class="avatar">N</div><div class="message-body muted">NEXUS está pensando...</div>';
+ loading.innerHTML='<div class="avatar">N</div><div class="message-body"><span class="thinking-indicator">NEXUS está pensando <span class="thinking-dots"><span>.</span><span>.</span><span>.</span></span></span></div>';
  document.getElementById("messages").appendChild(loading);
-
  try{
   const d=await api("/api/chat",{
    message,
@@ -646,22 +523,11 @@ async function sendMessage(){
    fileContext:pendingFileContext,
    model:selectedModel
   });
-
-  loading.remove();
-
-  if(d.moderationNotice){
-   applySafetyUI(d.safety);
-   addMessage("assistant",d.moderationNotice+"\n\nMotivo registrado: "+d.reason+"\nAvisos acumulados: "+d.warningCount+"/3.");
-   pendingFileContext="";
-   pendingFileName="";
-   document.getElementById("fileStatus").textContent="";
-   return;
-  }
-
   currentConversation=d.conversationId;
   pendingFileContext="";
   pendingFileName="";
   document.getElementById("fileStatus").textContent="";
+  loading.remove();
   addMessage("assistant",d.reply);
   updateUsage(d.usage);
   await loadHistory();
@@ -680,23 +546,18 @@ async function loadHistory(){
   const d=await api("/api/conversations");
   conversations=d.conversations||[];
   renderHistory();
- }catch(e){
-  console.error(e);
- }
+ }catch(e){console.error(e)}
 }
 
 function renderHistory(){
  const box=document.getElementById("history");
  box.innerHTML="";
-
  conversations.forEach(c=>{
   const item=document.createElement("div");
   item.className="history-item"+(c.id===currentConversation?" active":"");
-
   const title=document.createElement("span");
   title.textContent=c.title||"Conversación";
   title.onclick=()=>openConversation(c.id);
-
   const del=document.createElement("button");
   del.className="delete-chat";
   del.textContent="×";
@@ -705,7 +566,6 @@ function renderHistory(){
    e.stopPropagation();
    deleteConversation(c.id);
   };
-
   item.append(title,del);
   box.appendChild(item);
  });
@@ -715,38 +575,34 @@ async function openConversation(id){
  try{
   const d=await api("/api/conversations/"+encodeURIComponent(id));
   currentConversation=id;
-
   document.getElementById("chatView").classList.remove("hidden");
   document.getElementById("settingsView").classList.add("hidden");
   document.getElementById("pageTitle").textContent=d.conversation.title||"Conversación";
-
   const box=document.getElementById("messages");
   box.innerHTML="";
   (d.messages||[]).forEach(m=>addMessage(m.role,m.content));
-
   renderHistory();
   document.getElementById("sidebar").classList.remove("open");
- }catch(e){
-  toast(e.message);
- }
+ }catch(e){toast(e.message)}
 }
 
 async function deleteConversation(id){
  if(!confirm("¿Eliminar esta conversación?"))return;
-
  try{
   await api("/api/conversations/"+encodeURIComponent(id),{action:"delete"});
   if(currentConversation===id)newChat();
   await loadHistory();
   toast("Conversación eliminada");
- }catch(e){
-  toast(e.message);
- }
+ }catch(e){toast(e.message)}
 }
 
 function showSettings(){
  document.getElementById("chatView").classList.add("hidden");
- document.getElementById("settingsView").classList.remove("hidden");
+ const settings=document.getElementById("settingsView");
+ settings.classList.remove("hidden");
+ settings.style.animation="none";
+ void settings.offsetWidth;
+ settings.style.animation="";
  document.getElementById("pageTitle").textContent="Ajustes";
  document.getElementById("sidebar").classList.remove("open");
  settingsTab("account",document.querySelector(".tab"));
@@ -756,10 +612,8 @@ function settingsTab(name,button){
  ["account","memory","preferences","admin"].forEach(n=>{
   document.getElementById(n+"Panel").classList.toggle("hidden",n!==name);
  });
-
  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
  if(button)button.classList.add("active");
-
  if(name==="memory")loadMemory();
  if(name==="preferences")loadPreferences();
  if(name==="admin")loadAdminStats();
@@ -768,24 +622,19 @@ function settingsTab(name,button){
 async function changePassword(){
  const currentPassword=document.getElementById("currentPass").value;
  const newPassword=document.getElementById("newPass").value;
-
  try{
   await api("/api/password",{currentPassword,newPassword});
   document.getElementById("currentPass").value="";
   document.getElementById("newPass").value="";
   toast("Contraseña cambiada correctamente");
- }catch(e){
-  toast(e.message);
- }
+ }catch(e){toast(e.message)}
 }
 
 async function loadMemory(){
  try{
   const d=await api("/api/memory");
   document.getElementById("memoryText").value=d.content||"";
- }catch(e){
-  toast(e.message);
- }
+ }catch(e){toast(e.message)}
 }
 
 async function saveMemory(){
@@ -795,25 +644,19 @@ async function saveMemory(){
    content:document.getElementById("memoryText").value
   });
   toast("Memoria guardada");
- }catch(e){
-  toast(e.message);
- }
+ }catch(e){toast(e.message)}
 }
 
 async function loadPreferences(){
  try{
-  const d=await api("/api/preferences");
-  const s=d.settings||{};
-
+  const d=await api("/api/preferences");const s=d.settings||{};
   document.getElementById("preferencesText").value=s.instructions||"";
   document.getElementById("prefTone").value=s.tone||"natural";
   document.getElementById("prefDetail").value=s.detail||"balanced";
   document.getElementById("prefFormat").value=s.format||"adaptive";
   document.getElementById("prefLanguage").value=s.language||"auto";
   document.getElementById("prefEmojis").value=s.emojis||"auto";
- }catch(e){
-  toast(e.message);
- }
+ }catch(e){toast(e.message)}
 }
 
 async function savePreferences(){
@@ -826,28 +669,18 @@ async function savePreferences(){
    language:document.getElementById("prefLanguage").value,
    emojis:document.getElementById("prefEmojis").value
   };
-
-  await api("/api/preferences",{action:"save",settings});
-  toast("Personalización guardada");
- }catch(e){
-  toast(e.message);
- }
+  await api("/api/preferences",{action:"save",settings});toast("Personalización guardada");
+ }catch(e){toast(e.message)}
 }
+
+/* ADMINISTRACIÓN Y REGALOS */
 
 async function loadAdminStats(){
  if(!currentUser?.admin)return;
-
  const table=document.getElementById("usersTable");
- const bansTable=document.getElementById("bannedDevicesTable");
- table.innerHTML="<tr><td colspan='9'>Cargando...</td></tr>";
- bansTable.innerHTML="<tr><td colspan='4'>Cargando...</td></tr>";
-
+ table.innerHTML="<tr><td colspan='7'>Cargando...</td></tr>";
  try{
-  const [d,bansData]=await Promise.all([
-   api("/api/admin/stats"),
-   api("/api/admin/bans")
-  ]);
-
+  const d=await api("/api/admin/stats");
   document.getElementById("totalUsers").textContent=d.totalUsers;
   document.getElementById("maxUsers").textContent=d.maxUsers;
   document.getElementById("messagesToday").textContent=d.messagesToday;
@@ -855,34 +688,16 @@ async function loadAdminStats(){
 
   (d.users||[]).forEach(u=>{
    const tr=document.createElement("tr");
+
    const name=document.createElement("td");
    name.textContent=u.username;
-
-   const warnings=Number(u.warnings||0);
-   const level=Number(u.restriction_level||0);
-   const until=u.restriction_until==null?0:Number(u.restriction_until);
-   const activeRestriction=level===2||(level===1&&until>Date.now()/1000);
-
-   const warningCell=document.createElement("td");
-   warningCell.textContent=warnings+"/3";
-   if(warnings)warningCell.className="pending-gift";
-
-   const restrictionCell=document.createElement("td");
-   restrictionCell.textContent=level===2
-    ?"Imágenes · regalos · Smart/Ultra"
-    :level===1&&activeRestriction
-     ?"Imágenes · regalos (3 días)"
-     :level===1
-      ?"Temporal caducada"
-      :"Ninguna";
-   restrictionCell.title=u.last_reason||"";
 
    const count=document.createElement("td");
    count.textContent=u.messages_today??0;
 
    const bonus=document.createElement("td");
    const bonusCount=Number(u.bonus_messages??u.bonusMessages??0);
-   bonus.textContent=bonusCount>0?`${bonusCount} usos extra`:"Ninguno";
+   bonus.textContent=bonusCount>0?`${bonusCount} mensajes`:"Ninguno";
    if(bonusCount>0)bonus.className="pending-gift";
 
    const images=document.createElement("td");
@@ -893,6 +708,7 @@ async function loadAdminStats(){
 
    const giftCell=document.createElement("td");
    const actions=document.createElement("td");
+
    const isAdmin=String(u.username).toLowerCase()==="javi";
 
    if(isAdmin){
@@ -901,7 +717,7 @@ async function loadAdminStats(){
    }else{
     const select=document.createElement("select");
     select.className="gift-select";
-    select.setAttribute("aria-label","Cantidad de usos para regalar");
+    select.setAttribute("aria-label","Cantidad de mensajes para regalar");
 
     for(let i=1;i<=5;i++){
      const option=document.createElement("option");
@@ -913,24 +729,15 @@ async function loadAdminStats(){
     const giftButton=document.createElement("button");
     giftButton.className="gift-btn";
     giftButton.textContent="Regalar";
-    giftButton.disabled=bonusCount>0||activeRestriction;
-    giftButton.title=activeRestriction
-     ?"La cuenta tiene restricciones de seguridad"
-     :bonusCount>0
-      ?"Primero debe gastar el regalo pendiente"
-      :"Regalar usos extra";
+    giftButton.disabled=bonusCount>0;
+    giftButton.title=bonusCount>0
+     ?"Primero debe gastar el regalo pendiente"
+     :"Regalar mensajes extra";
 
     if(bonusCount>0){
      const pending=document.createElement("small");
      pending.className="gift-status";
      pending.textContent="Regalo pendiente";
-     giftCell.appendChild(pending);
-    }
-
-    if(activeRestriction){
-     const pending=document.createElement("small");
-     pending.className="gift-status";
-     pending.textContent="Regalo bloqueado";
      giftCell.appendChild(pending);
     }
 
@@ -941,15 +748,6 @@ async function loadAdminStats(){
     giftControls.append(select,giftButton);
     giftCell.appendChild(giftControls);
 
-    if(warnings>0){
-     const resetButton=document.createElement("button");
-     resetButton.className="secondary";
-     resetButton.textContent="Restablecer avisos";
-     resetButton.style.marginRight="6px";
-     resetButton.onclick=()=>resetSafety(u.id,u.username);
-     actions.appendChild(resetButton);
-    }
-
     const deleteButton=document.createElement("button");
     deleteButton.className="danger";
     deleteButton.textContent="Eliminar";
@@ -957,69 +755,15 @@ async function loadAdminStats(){
     actions.appendChild(deleteButton);
    }
 
-   tr.append(name,warningCell,restrictionCell,count,bonus,images,files,giftCell,actions);
+   tr.append(name,count,bonus,images,files,giftCell,actions);
    table.appendChild(tr);
   });
 
   if(!d.users?.length){
-   table.innerHTML="<tr><td colspan='9'>No hay cuentas.</td></tr>";
-  }
-
-  bansTable.innerHTML="";
-
-  (bansData.bans||[]).forEach(b=>{
-   const tr=document.createElement("tr");
-
-   const username=document.createElement("td");
-   username.textContent=b.username;
-
-   const reason=document.createElement("td");
-   reason.textContent=b.reason;
-
-   const date=document.createElement("td");
-   date.textContent=b.created_at||"—";
-
-   const action=document.createElement("td");
-   const button=document.createElement("button");
-   button.className="gift-btn";
-   button.textContent="Desbanear";
-   button.onclick=()=>unbanDevice(b.id,b.username);
-   action.appendChild(button);
-
-   tr.append(username,reason,date,action);
-   bansTable.appendChild(tr);
-  });
-
-  if(!bansData.bans?.length){
-   bansTable.innerHTML="<tr><td colspan='4'>No hay navegadores bloqueados.</td></tr>";
+   table.innerHTML="<tr><td colspan='7'>No hay cuentas.</td></tr>";
   }
  }catch(e){
-  table.innerHTML=`<tr><td colspan="9">${escapeHTML(e.message)}</td></tr>`;
-  bansTable.innerHTML=`<tr><td colspan="4">${escapeHTML(e.message)}</td></tr>`;
- }
-}
-
-async function resetSafety(id,username){
- if(!confirm(`¿Restablecer todos los avisos y restricciones de ${username}?`))return;
-
- try{
-  const d=await api("/api/admin/users/"+encodeURIComponent(id),{action:"reset-safety"});
-  toast(d.message);
-  await loadAdminStats();
- }catch(e){
-  toast(e.message);
- }
-}
-
-async function unbanDevice(id,username){
- if(!confirm(`¿Desbanear el navegador asociado a ${username}? La cuenta eliminada no se recuperará.`))return;
-
- try{
-  const d=await api("/api/admin/bans/"+encodeURIComponent(id),{action:"unban"});
-  toast(d.message);
-  await loadAdminStats();
- }catch(e){
-  toast(e.message);
+  table.innerHTML=`<tr><td colspan="7">${escapeHTML(e.message)}</td></tr>`;
  }
 }
 
@@ -1050,19 +794,60 @@ async function giftMessages(id,username,amount,button){
 
 async function deleteAccount(id,username){
  if(!confirm(`¿Eliminar definitivamente la cuenta "${username}"?\n\nSe borrarán sus conversaciones, memoria, preferencias y sesiones. Esta acción no se puede deshacer.`))return;
-
  try{
   const d=await api("/api/admin/users/"+encodeURIComponent(id),{
    action:"delete"
   });
   toast(d.message||"Cuenta eliminada");
   await loadAdminStats();
- }catch(e){
-  toast(e.message);
- }
+ }catch(e){toast(e.message)}
 }
 
-initializeNexus();
+function reportBug(){
+ const bugs=[
+  ["001","Error de baneo"],
+  ["002","Imágenes mal hechas"],
+  ["003","La IA se enfadó o respondió incorrectamente"],
+  ["004","Error al iniciar sesión"],
+  ["005","Error al crear una cuenta"],
+  ["006","Error al subir o leer archivos"],
+  ["007","Error al generar imágenes"],
+  ["008","Error de conversaciones o historial"],
+  ["009","Error de memoria"],
+  ["010","Error de límites y usos"],
+  ["011","Error de ajustes o preferencias"],
+  ["012","Otro problema"]
+ ];
+ const menu=bugs.map(([id,name])=>`${id} - ${name}`).join("\n");
+ const selected=window.prompt("¿Qué problema has encontrado?\n\n"+menu+"\n\nEscribe el número del bug (por ejemplo, 001):");
+ if(selected===null)return;
+ const bug=bugs.find(([id])=>id===selected.trim());
+ if(!bug){toast("Número de bug no válido.");return;}
+ const description=window.prompt("Describe el problema.\n\nCuantos más detalles proporciones, más fácil será solucionarlo.");
+ if(description===null)return;
+ const username=currentUser?.username||document.getElementById("loginUser")?.value.trim()||"No identificado";
+ const subject=`Bug ${bug[0]} - ${bug[1]}`;
+ const body=[
+  "INFORME DE ERROR - NEXUS AI","",
+  "Número: "+bug[0],
+  "Problema: "+bug[1],
+  "Usuario: "+username,
+  "Fecha: "+new Date().toLocaleString("es-ES"),"",
+  "DESCRIPCIÓN DEL PROBLEMA:",
+  description.trim()||"Sin descripción adicional.","",
+  "INFORMACIÓN TÉCNICA:",
+  "Navegador: "+navigator.userAgent,
+  "Plataforma: "+(navigator.platform||"Desconocida"),"",
+  "Enviado desde NEXUS AI."
+ ].join("\n");
+ const mailto="mailto:jacogalcraft@outlook.com"+
+  "?subject="+encodeURIComponent(subject)+
+  "&body="+encodeURIComponent(body);
+ window.location.href=mailto;
+ toast("Abriendo tu aplicación de correo...");
+}
+
+checkSession();
 </script>
 </body>
 </html>
